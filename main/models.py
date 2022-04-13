@@ -12,73 +12,73 @@ from django.db import models
 
 
 class Booking(models.Model):
-    booking_id = models.AutoField(blank=True, null=True, primary_key=True)
-    booking_date = models.DateField(blank=True, null=True)
-    booking_time = models.TimeField(blank=True, null=True)
-    ticket_id = models.IntegerField(blank=True, null=True)
-    customer = models.ForeignKey('Customer', models.DO_NOTHING, blank=True, null=True)
+    booking_id = models.AutoField(primary_key=True)
+    booking_date = models.DateField()
+    booking_time = models.TimeField()
+    ticket_id = models.IntegerField()
+    customer = models.ForeignKey('Customer', models.DO_NOTHING, )
 
     class Meta:
         db_table = 'Booking'
 
 
 class Category(models.Model):
-    category_id = models.AutoField(blank=True, null=True, primary_key=True)
-    category_name = models.CharField(blank=True, null=True)
+    category_id = models.AutoField(primary_key=True)
+    category_name = models.CharField()
 
     class Meta:
         db_table = 'Category'
 
 
 class CreditCard(models.Model):
-    credit_card = models.ForeignKey('Payment', models.DO_NOTHING, db_column='credit_card', blank=True, null=True)
-    owner_name = models.CharField(blank=True, null=True)
-    experitation_date = models.DateField(blank=True, null=True)
-    verification_code = models.IntegerField(blank=True, null=True)
+    credit_card = models.ForeignKey('Payment', models.DO_NOTHING, db_column='credit_card', )
+    owner_name = models.CharField()
+    experitation_date = models.DateField()
+    verification_code = models.IntegerField()
 
     class Meta:
         db_table = 'Credit_Card'
 
 
 class User(AbstractUser):
-    customer_id = models.AutoField(blank=True, null=True, primary_key=True)
-    customer_name = models.CharField(blank=True, null=True)
-    customer_surname = models.CharField(blank=True, null=True)
-    customer_age = models.IntegerField(blank=True, null=True)
-    customer_email = models.EmailField(blank=True, null=True)
-    customer_phone_number = models.CharField(blank=True, null=True)
+    customer_id = models.AutoField(primary_key=True)
+    customer_name = models.CharField()
+    customer_surname = models.CharField()
+    customer_age = models.IntegerField()
+    customer_email = models.EmailField()
+    customer_phone_number = models.CharField()
 
     class Meta:
         db_table = 'Customer'
 
 
 class Favorites(models.Model):
-    favorites_id = models.AutoField(blank=True, null=True, primary_key=True)
-    movie_id = models.IntegerField(blank=True, null=True)
+    favorites_id = models.AutoField(primary_key=True)
+    movie_id = models.IntegerField()
 
     class Meta:
         db_table = 'Favorites'
 
 
 class Hall(models.Model):
-    hall = models.ForeignKey('HallSeat', models.DO_NOTHING, blank=True, null=True)
-    hall_name = models.CharField(blank=True, null=True)
+    hall = models.ForeignKey('HallSeat', models.DO_NOTHING, )
+    hall_name = models.CharField()
 
     class Meta:
         db_table = 'Hall'
 
 
 class HallSeat(models.Model):
-    hall_seat_id = models.AutoField(blank=True, null=True, primary_key=True)
-    seat_id = models.IntegerField(blank=True, null=True)
-    hall_id = models.IntegerField(blank=True, null=True)
+    hall_seat_id = models.AutoField(primary_key=True)
+    seat_id = models.IntegerField()
+    hall_id = models.IntegerField()
 
     class Meta:
         db_table = 'Hall_Seat'
 
 
 class Movie(models.Model):
-    movie_id = models.AutoField(blank=True, null=True, primary_key=True)
+    movie_id = models.AutoField(primary_key=True)
     movie = models.ForeignKey(Favorites, models.DO_NOTHING)
     movie_title = models.CharField()
     movie_year = models.IntegerField()
@@ -87,39 +87,39 @@ class Movie(models.Model):
     movie_director = models.CharField()
     movie_actors = models.CharField()
     movie_plot = models.TextField()
-    movie_posterurl = models.CharField(db_column='movie_posterUrl', blank=True, null=True)  # Field name made lowercase.
+    movie_posterurl = models.CharField(db_column='movie_posterUrl', )  # Field name made lowercase.
 
     class Meta:
         db_table = 'Movie'
 
 
 class Payment(models.Model):
-    payment_id = models.AutoField(blank=True, null=True, primary_key=True)
-    booking_id = models.IntegerField(blank=True, null=True)
-    credit_card = models.IntegerField(blank=True, null=True)
+    payment_id = models.AutoField(primary_key=True)
+    booking_id = models.IntegerField()
+    credit_card = models.IntegerField()
 
     class Meta:
         db_table = 'Payment'
 
 
 class Seat(models.Model):
-    seat = models.ForeignKey(HallSeat, models.DO_NOTHING, blank=True, null=True)
-    amount_of_seats = models.IntegerField(blank=True, null=True)
+    seat = models.ForeignKey(HallSeat, models.DO_NOTHING, )
+    amount_of_seats = models.IntegerField()
 
     class Meta:
         db_table = 'Seat'
 
 
 class Ticket(models.Model):
-    ticket_id = models.AutoField(blank=True, null=True, primary_key=True)
-    ticket = models.ForeignKey(Booking, models.DO_NOTHING, blank=True, null=True)
-    ticket_price = models.IntegerField(blank=True, null=True)
-    number_of_tickets = models.IntegerField(blank=True, null=True)
-    ticket_time = models.TimeField(blank=True, null=True)
-    ticket_date = models.DateField(blank=True, null=True)
-    hall_seats_id = models.IntegerField(blank=True, null=True)
-    category = models.ForeignKey(Category, models.DO_NOTHING, blank=True, null=True)
-    movie = models.ForeignKey(Movie, models.DO_NOTHING, blank=True, null=True)
+    ticket_id = models.AutoField(primary_key=True)
+    ticket = models.ForeignKey(Booking, models.DO_NOTHING, )
+    ticket_price = models.IntegerField()
+    number_of_tickets = models.IntegerField()
+    ticket_time = models.TimeField()
+    ticket_date = models.DateField()
+    hall_seats_id = models.IntegerField()
+    category = models.ForeignKey(Category, models.DO_NOTHING, )
+    movie = models.ForeignKey(Movie, models.DO_NOTHING, )
 
     class Meta:
         db_table = 'Ticket'

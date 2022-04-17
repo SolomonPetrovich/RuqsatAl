@@ -9,7 +9,8 @@ class Hall(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Hall'
+        verbose_name = 'Hall'
+        verbose_name_plural = 'Halls'
 
 
 class Seat(models.Model):
@@ -19,7 +20,8 @@ class Seat(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Seat'
+        verbose_name = 'Seat'
+        verbose_name_plural = 'Seats'
 
 
 class HallSeat(models.Model):
@@ -30,7 +32,8 @@ class HallSeat(models.Model):
         return self.hall + ' : ' + self.seat
 
     class Meta:
-        db_table = 'Hall_Seat'
+        verbose_name = 'HeallSeat'
+        verbose_name_plural = 'HallSeats'
 
 
 class Category(models.Model):
@@ -40,7 +43,8 @@ class Category(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Category'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
 
 class Movie(models.Model):
@@ -57,7 +61,8 @@ class Movie(models.Model):
         return self.title
 
     class Meta:
-        db_table = 'Movie'
+        verbose_name = 'Movie'
+        verbose_name_plural = 'Movies'
 
 
 class Admin(BaseUserManager):
@@ -74,7 +79,8 @@ class Favorites(models.Model):
     user = models.ForeignKey('User', models.DO_NOTHING)
 
     class Meta:
-        db_table = 'Favorites'
+        verbose_name = 'Favorite'
+        verbose_name_plural = 'Favorites'
 
 
 class Session(models.Model):
@@ -88,7 +94,8 @@ class Session(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Session'
+        verbose_name = 'Session'
+        verbose_name_plural = 'Sessions'
 
 
 class Ticket(models.Model):
@@ -98,9 +105,14 @@ class Ticket(models.Model):
     session = models.ForeignKey('Session', models.DO_NOTHING)
 
     class Meta:
-        db_table = 'Ticket'
+        verbose_name = 'Ticket'
+        verbose_name_plural = 'Tickets'
 
 
 class Booking(models.Model):
     ticket = models.ForeignKey('Ticket', models.DO_NOTHING)
     user = models.ForeignKey('User', models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = 'Booking'
+        verbose_name_plural = 'Bookings'

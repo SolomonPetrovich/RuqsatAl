@@ -1,14 +1,17 @@
 from django.urls import path
-from . import views
+from .views import *
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('contact/', views.contact, name='contact'),
-    path('about/', views.about, name='about'),
-    path('e_ticket/', views.e_ticket, name='e_ticket'),
-    path('signin/', views.sign_in, name='sign_in'),
-    path('ticket_booking/', views.ticket_booking, name='ticket_booking'),
-    path('seat_seal/', views.seat_seat, name='seat_seal'),
-    path('movies/', views.movies, name='movies'),
+    path('', HomeView.as_view(), name='home'),
+    path('contact/', ContactView.as_view(), name='contact'),
+    path('about/', about, name='about'),
+    path('e_ticket/', e_ticket, name='e_ticket'),
+    path('login/', LoginUserView.as_view(), name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('ticket_booking/', ticket_booking, name='ticket_booking'),
+    path('seat_seal/', seat_seat, name='seat_seal'),
+    path('movies/', MovieView.as_view(), name='movies'),
+    path('profile/', profile, name='profile')
 ]

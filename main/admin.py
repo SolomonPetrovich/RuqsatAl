@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models import *
 
-admin.register(User)
-admin.register(Ticket)
-admin.register(Booking)
-admin.register(Hall)
-admin.register(Seat)
-admin.register(HallSeat)
-admin.register(Session)
-admin.register(Favorites)
-admin.register(Category)
-admin.register(Movie)
+admin.site.register(User)
+admin.site.register(Ticket)
+admin.site.register(Booking)
+admin.site.register(Hall)
+admin.site.register(Seat)
+admin.site.register(HallSeat)
+admin.site.register(Session)
+admin.site.register(Favorites)
+admin.site.register(Category)
+admin.site.register(Movie)

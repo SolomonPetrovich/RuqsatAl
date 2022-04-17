@@ -1,0 +1,37 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/sign-in.css' %}">
+    <link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+{% endblock %}
+{% block content %}
+    <div class="container_signup_signin" id="container_signup_signin">
+        <div class="form-container sign-in-container">
+            <form name="sign-up-form" method="POST" action="#" onsubmit="return signUpValidateForm()">
+                {% csrf_token %}
+                <h1>Create Account</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                {% for f in form %}
+                    {{ f }}
+                    <span class="form-error">{{ f.error }}</span>
+                {% endfor %}
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your login details</p>
+                    <a href="{% url 'login' %}"><button class="ghost" id="signIn">Sign In</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

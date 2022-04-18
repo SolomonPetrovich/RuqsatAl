@@ -1,9 +1,7 @@
-from django.contrib import messages
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from .models import *
 from .forms import CustomLoginUserForm, CustomRegisterUserForm
 from django.views.generic import *
@@ -78,7 +76,7 @@ def seat_seat(request):
 
 class MovieView(ListView):
     model = Movie
-    template_name = 'main/index.html'
+    template_name = 'main/movies.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

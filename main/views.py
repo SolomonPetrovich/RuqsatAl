@@ -6,16 +6,16 @@ from .models import *
 from .forms import CustomLoginUserForm, CustomRegisterUserForm
 from django.views.generic import *
 
-# Create your views here.
-
 
 class HomeView(ListView):
     model = Movie
     template_name = 'main/index.html'
+    genres = Genres.objects.all()
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, genres=genres,**kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Home'
+        context['genres'] = genres
         return context
 
 
@@ -24,7 +24,14 @@ class ContactView(View):
 
 
 def about(request):
-    return render(request, 'main/about.html')
+    movies = Movie.objects.count()
+    admins = User.objects.filter(is_staff=True).count()
+    users = User.objects.all().count()
+    context = {'title': 'About',
+               'movie_count': movies,
+               'staff_count': admins,
+               'users': users}
+    return render(request, 'main/about.html', context)
 
 
 def e_ticket(request):
@@ -77,6 +84,42 @@ def seat_seat(request):
 class MovieView(ListView):
     model = Movie
     template_name = 'main/movies.html'
+    genres = Genres.objects.all()
+    paginate_by = 12
+    ordering = ['-popularity']
+
+    def get_context_data(self, genres=genres, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Movies'
+        context['genres'] = genres
+        return context
+
+
+def show_genre(request, pk):
+    genre = Genres.objects.get(pk=pk)
+    movies = Movie.objects.all()
+    genres = Genres.objects.all()
+    context = {'title': genre,
+               'movies': movies,
+               'genres': genres}
+    return render(request, 'main/movie_genre.html', context)
+
+
+def show_movie(request):
+    title = request.GET.get('search')
+    movies = Movie.objects.filter(title__contains=title)
+    context = {'title': 'Searching: ' + title,
+               'movies': movies}
+    return render(request, 'main/movie.html', context)
+
+
+class MovieGenreView(ListView):
+    model = Movie
+    template_name = 'main/movie_genre.html'
+    context_object_name = 'genre'
+
+    def get_queryset(self):
+        return Movie.objects.filter(pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

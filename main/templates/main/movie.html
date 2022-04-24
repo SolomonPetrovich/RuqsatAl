@@ -1,0 +1,70 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block content %}
+    <!--grids-sec1-->
+    <section class="w3l-grids">
+        <div class="grids-main py-5">
+            <div class="container py-lg-4">
+                <div class="headerhny-title">
+                    <div class="w3l-title-grids">
+                        <div class="headerhny-left">
+                            <h3 class="hny-title">{{ title }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3l-populohny-grids">
+                    {% for movie in movies %}
+                        {% if movie.poster_path %}
+                        <div class="item vhny-grid">
+                            <div class="box16 mb-0">
+                                <a href=".{{ movie.title }}">
+                                    <figure>
+                                        <img class="img-fluid" src="{{ movie.poster_path }}" alt="">
+                                    </figure>
+                                    <div class="box-content">
+                                        <h3 class="title">{{ movie.title }}</h3>
+                                        <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date }}</span>
+                                            <span class="post fa fa-heart text-right"></span>
+                                        </h4>
+                                    </div>
+                                </a>
+                                <div class="modal fade {{ movie.title }}" id="myModal" tabindex="-1" role="dialog"
+								aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content" id="mymodalcontent">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLongTitle">DETAILS</h4>
+                                                <button type="button" class="closebtn" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="dynamic-content">
+                                                <img src="{{ movie.poster_path }}" class="img-fluid modalimg" alt="" />
+                                                <p>
+                                                    <h3>Original Title&nbsp;: {{ movie.original_title }}</h3>
+                                                    <h3>Genres &nbsp;: {{ movie.genres.all }}</h3>
+                                                    <h3>Rating &nbsp;: {{ movie.vote_average }}</h3>
+                                                    <h3>Popolarity &nbsp;: {{ movie.popularity }}</h3>
+                                                </p>
+                                                <h4>About Movie</h4>
+                                                <p>
+                                                    {{ movie.overview }}
+                                                </p>
+                                            </div>
+                                            <div class="bookbtn">
+                                                <button type="button" class="btn btn-success"
+                                                    onclick="location.href='ticket-booking.html';">Book</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

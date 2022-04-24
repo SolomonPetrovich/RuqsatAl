@@ -47,15 +47,28 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
+class Genres(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Genre'
+        verbose_name_plural = 'Genres'
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=150)
-    year = models.IntegerField()
-    runtime = models.IntegerField()
-    genres = models.CharField(max_length=150)
-    director = models.CharField(max_length=150)
-    actors = models.CharField(max_length=150)
-    plot = models.TextField()
-    poster_url = models.CharField(db_column='posterUrl', max_length=500)
+    original_title = models.CharField(max_length=150)
+    original_language = models.CharField(max_length=150)
+    overview = models.TextField(null=True)
+    popularity = models.FloatField(null=True)
+    poster_path = models.CharField(null=True, max_length=500)
+    release_date = models.DateField(null=True, max_length=150)
+    vote_average = models.FloatField(null=True)
+    vote_count = models.IntegerField(null=True)
+    genres = models.ManyToManyField(Genres)
 
     def __str__(self):
         return self.title
@@ -70,6 +83,8 @@ class Admin(BaseUserManager):
 
 
 class User(AbstractUser):
+    phone = models.CharField(null=True, max_length=150)
+
     def __str__(self):
         return self.username
 

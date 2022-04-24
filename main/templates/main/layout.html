@@ -71,7 +71,7 @@
                         <!-- search popup -->
                         <div id="search" class="pop-overlay">
                             <div class="popup">
-                                <form action="#" method="post" class="search-box">
+                                <form action="{% url 'movie' %}" method="GET" class="search-box">
                                     <label>
                                         <input type="search" placeholder="Search your Keyword" name="search"
                                             required="required" autofocus="">
@@ -82,22 +82,9 @@
                                 <div class="browse-items">
                                     <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
                                     <ul class="search-items">
-                                        <li><a href="{% url 'movies' %}">Action</a></li>
-                                        <li><a href="{% url 'movies' %}">Drama</a></li>
-                                        <li><a href="{% url 'movies' %}">Family</a></li>
-                                        <li><a href="{% url 'movies' %}">Thriller</a></li>
-                                        <li><a href="{% url 'movies' %}">Commedy</a></li>
-                                        <li><a href="{% url 'movies' %}">Romantic</a></li>
-                                        <li><a href="{% url 'movies' %}">Tv-Series</a></li>
-                                        <li><a href="{% url 'movies' %}">Horror</a></li>
-                                        <li><a href="{% url 'movies' %}">Action</a></li>
-                                        <li><a href="{% url 'movies' %}">Drama</a></li>
-                                        <li><a href="{% url 'movies' %}">Family</a></li>
-                                        <li><a href="{% url 'movies' %}">Thriller</a></li>
-                                        <li><a href="{% url 'movies' %}">Commedy</a></li>
-                                        <li><a href="{% url 'movies' %}">Romantic</a></li>
-                                        <li><a href="{% url 'movies' %}">Tv-Series</a></li>
-                                        <li><a href="{% url 'movies' %}">Horror</a></li>
+                                        {% for g in genres %}
+                                        <li><a href="{% url 'movies_genre' pk=g.pk %}">{{ g }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
@@ -258,7 +245,7 @@
     })
 </script>
 <!-- script for owlcarousel -->
-<script src="{% static 'assets/js/jquery.magnific-popup' %}.min.js"></script>
+<script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
 <script>
     $(document).ready(function () {
         $('.popup-with-zoom-anim').magnificPopup({
@@ -330,6 +317,12 @@
             }
         });
     });
-</script>
 
+
+    console.log("Live");
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
+</script>
 <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/all.js' %}"></script>

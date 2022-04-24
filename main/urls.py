@@ -13,5 +13,7 @@ urlpatterns = [
     path('ticket_booking/', ticket_booking, name='ticket_booking'),
     path('seat_seal/', seat_seat, name='seat_seal'),
     path('movies/', MovieView.as_view(), name='movies'),
+    path('genre/<int:pk>', show_genre, name='movies_genre'),
+    path('movie/', show_movie, name='movie'),
     path('profile/', profile, name='profile')
 ]

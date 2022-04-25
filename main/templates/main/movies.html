@@ -5,33 +5,29 @@
     <section class="w3l-grids">
         <div class="grids-main py-5">
             <div class="container py-lg-4">
-            {% for movie in movie_list %}
                 <div class="headerhny-title">
                     <div class="w3l-title-grids">
                         <div class="headerhny-left">
-                            <h3 class="hny-title">{{ movie }}</h3>
-                        </div>
-                        <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="">Show all</a></h4>
+                            <h3 class="hny-title">All</h3>
                         </div>
                     </div>
                 </div>
                 <div class="w3l-populohny-grids">
-                    {% for item in movie %}
+                    {% for movie in movie_list %}
                         <div class="item vhny-grid">
                             <div class="box16 mb-0">
-                                <a href=".{{ item.title }}">
+                                <a href=".{{ movie.title }}">
                                     <figure>
-                                        <img class="img-fluid" src="{{ item.poster_path }}" alt="">
+                                        <img class="img-fluid" src="{{ movie.poster_path }}" alt="">
                                     </figure>
                                     <div class="box-content">
-                                        <h3 class="title">{{ item.title }}</h3>
-                                        <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }}</span>
+                                        <h3 class="title">{{ movie.title }}</h3>
+                                        <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date }}</span>
                                             <span class="post fa fa-heart text-right"></span>
                                         </h4>
                                     </div>
                                 </a>
-                                <div class="modal fade {{ item.title }}" id="myModal" tabindex="-1" role="dialog"
+                                <div class="modal fade {{ movie.title }}" id="myModal" tabindex="-1" role="dialog"
 								aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content" id="mymodalcontent">
@@ -43,12 +39,12 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body" id="dynamic-content">
-                                                <img src="{{ item.poster_path }}" class="img-fluid modalimg" alt="" />
+                                                <img src="{{ movie.poster_path }}" class="img-fluid modalimg" alt="" />
                                                 <p>
-                                                    <h3>Original Title&nbsp;: {{ item.original_title }}</h3>
-                                                    <h3>Genres &nbsp;: {{ item.genres.all }}</h3>
-                                                    <h3>Rating &nbsp;: {{ item.vote_average }}</h3>
-                                                    <h3>Popolarity &nbsp;: {{ item.popularity }}</h3>
+                                                    <h3>Original Title&nbsp;: {{ movie.original_title }}</h3>
+                                                    <h3>Genres &nbsp;: {{ movie.genres.all }}</h3>
+                                                    <h3>Rating &nbsp;: {{ movie.vote_average }}</h3>
+                                                    <h3>Popolarity &nbsp;: {{ movie.popularity }}</h3>
                                                 </p>
                                                 <h4>About Movie</h4>
                                                 <p>
@@ -66,7 +62,31 @@
                         </div>
                     {% endfor %}
                 </div>
-            {% endfor %}
+                <nav>
+                    <ul class="pagination pagination-lg justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% for p in paginator.page_range %}
+                            {% if page_obj.number == p %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
         </div>
     </section>
@@ -87,12 +107,13 @@
                             <div class="albums-content">
                                 <div class="row">
                                     <!--/set1-->
+                                    {% for item in recent %}
                                     <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
                                         <div class="slider-info">
                                             <div class="img-circle">
                                                 <a href="{%  url 'movies' %}">
 
-                                                    <img src="{% static 'assets/images/m6.jpg'%}" class="img-fluid"
+                                                    <img src="{{ item.poster_path }}" class="img-fluid"
                                                         alt="author image">
                                                     <div class="overlay-icon">
 
@@ -101,226 +122,26 @@
                                                 </a>
                                             </div>
                                             <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Long Shot</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
+                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
                                                     <span class="post fa fa-heart text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m5.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Jumanji</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m4.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Little Women</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m1.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Rocketman</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m2.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Doctor Sleep</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m3.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Knives Out</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/n1.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">No Time to
-                                                    Die</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/n2.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Mulan</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/n3.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Free Guy</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="albums-content">
                                 <div class="row">
                                     <!--/set1-->
+                                    {% for item in popular %}
                                     <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
                                         <div class="slider-info">
                                             <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m1.jpg'%}" class="img-fluid"
+                                                <a href="{%  url 'movies' %}">
+
+                                                    <img src="{{ item.poster_path }}" class="img-fluid"
                                                         alt="author image">
                                                     <div class="overlay-icon">
 
@@ -329,153 +150,26 @@
                                                 </a>
                                             </div>
                                             <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Rocketman</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
+                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
                                                     <span class="post fa fa-heart text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m2.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Doctor Sleep</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m3.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Knives Out</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m7.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Frozen 2</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m8.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Toy Story 4</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m9.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Joker</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="albums-content">
                                 <div class="row">
                                     <!--/set3-->
+                                    {% for item in trend %}
                                     <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
                                         <div class="slider-info">
                                             <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m7.jpg'%}" class="img-fluid"
+                                                <a href="{%  url 'movies' %}">
+
+                                                    <img src="{{ item.poster_path }}" class="img-fluid"
                                                         alt="author image">
                                                     <div class="overlay-icon">
 
@@ -484,142 +178,14 @@
                                                 </a>
                                             </div>
                                             <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Frozen 2</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
+                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
                                                     <span class="post fa fa-heart text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m8.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Toy Story 4</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m9.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Joker</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!--/set3-->
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m10.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">Alita</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m11.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">The Lego</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}"><img
-                                                        src="{% static 'assets/images/m12.jpg'%}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <p>English</p>
-                                                <a class="author-book-title" href="{%  url 'movies' %}">The Hustle</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
-
-                                                    </span>
-
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                </h4>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class HomeView(ListView):
     genres = Genres.objects.all()
     header_movies = Movie.objects.all().order_by('vote_average')[:4]
     popular_movies = Movie.objects.all().order_by('vote_average')[:4]
-    new_movies = Movie.objects.all().order_by('-release_date')[:6]
+    new_movies = Movie.objects.all().order_by('-release_date')[:19]
 
     def get_context_data(self, genres=genres, header_movies=header_movies, popular_movies=popular_movies, new_movies=new_movies,**kwargs):
         context = super().get_context_data(**kwargs)
@@ -60,32 +60,18 @@ class MovieView(ListView):
     model = Movie
     template_name = 'main/movies.html'
     genres = Genres.objects.all()
-    Adventure = Movie.objects.filter(genres__movie__genres='12')[:4]
-    Fantasy = Movie.objects.filter(genres__movie__genres='14')[:4]
-    Animation = Movie.objects.filter(genres__movie__genres='16')[:4]
-    Drama = Movie.objects.filter(genres__movie__genres='18')[:4]
-    Horror = Movie.objects.filter(genres__movie__genres='27')[:4]
-    Action = Movie.objects.filter(genres__movie__genres='28')[:4]
-    Comedy = Movie.objects.filter(genres__movie__genres='35')[:4]
-    History = Movie.objects.filter(genres__movie__genres='36')[:4]
-    Western = Movie.objects.filter(genres__movie__genres='37')[:4]
-    Thriller = Movie.objects.filter(genres__movie__genres='53')[:4]
-    Crime = Movie.objects.filter(genres__movie__genres='80')[:4]
-    Documentary = Movie.objects.filter(genres__movie__genres='99')[:4]
-    Science = Movie.objects.filter(genres__movie__genres='878')[:4]
-    Mystery = Movie.objects.filter(genres__movie__genres='9648')[:4]
-    Music = Movie.objects.filter(genres__movie__genres='10402')[:4]
-    Romance = Movie.objects.filter(genres__movie__genres='10749')[:4]
-    Family = Movie.objects.filter(genres__movie__genres='10751')[:4]
-    War = Movie.objects.filter(genres__movie__genres='10752')[:4]
-    TV = Movie.objects.filter(genres__movie__genres='10770')[:4]
-    movie_list = [Adventure, Fantasy, Animation, Drama, Horror, Action, Comedy, History, Western, Thriller, Crime, Documentary, Science, Mystery, Music, Romance, Family, War,TV]
+    recent = Movie.objects.all().order_by('-release_date')[:6]
+    popular = Movie.objects.all().order_by('-vote_average')[:6]
+    Trend = Movie.objects.all().order_by('-popularity')[:6]
+    paginate_by = 12
 
-    def get_context_data(self, genres=genres, movie_list=movie_list, **kwargs):
+    def get_context_data(self, genres=genres, recent=recent, popular=popular, trend=Trend, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Movies'
         context['genres'] = genres
-        context['movie_list'] = movie_list
+        context['recent'] = recent
+        context['popular'] = popular
+        context['trend'] = trend
         return context
 
 

@@ -3,33 +3,93 @@
 {% block content %}
     <!-- main-slider -->
     <section class="w3l-main-slider position-relative" id="home">
-        <div class="companies20-content">
-            <div class="owl-one owl-carousel owl-theme">
-                {% for item in header_movies %}
-                <div class="item">
-                    <li>
-                        <div class="slider-info banner-view bg bg2" style="background: url('{{ item.poster_path }}')">
-                            <div class="banner-info">
-                                <h3>{{ item.title}}</h3>
-                                <p>{{ item.overview }}</p>
-                                <a href="#small-dialog1" class="popup-with-zoom-anim play-view1">
-                                    <span class="video-play-icon">
-                                        <span class="fa fa-play"></span>
-                                    </span>
-                                    <h6>Watch Trailer</h6>
-                                </a>
-                                <div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
-                                    <iframe src="https://player.vimeo.com/video/358205676" allow="autoplay; fullscreen"
-                                        allowfullscreen=""></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
+		<div class="companies20-content">
+			<div class="owl-one owl-carousel owl-theme">
+				<div class="item" >
+					<li>
+						<div class="slider-info banner-view bg bg2" style="background-image: url(https://images3.alphacoders.com/121/thumb-1920-1214446.jpg)">
+							<div class="banner-info">
+								<h3>Sonic the Hedgehog 2</h3>
+								<p>
+                                    When the manic Dr Robotnik returns to Earth with a new ally, Knuckles the Echidna, Sonic and his new friend Tails is all that stands in their way.
+                                </p>
+								<a href="#small-dialog1" class="popup-with-zoom-anim play-view1">
+									<span class="video-play-icon">
+										<span class="fa fa-play"></span>
+									</span>
+									<h6>Watch Trailer</h6>
+								</a>
+								<div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
+									<iframe src="https://player.vimeo.com/video/663657856" allow="autoplay; fullscreen"
+										allowfullscreen=""></iframe>
+								</div>
+							</div>
+						</div>
+					</li>
+				</div>
+				<div class="item">
+					<li>
+						<div class="slider-info  banner-view banner-top1 bg bg2" style="background-image: url(https://b-static.besthdwallpaper.com/betmen-robert-pattinson-v-kostyume-betmena-poster-oboi-2400x1350-89590_50.jpg)">
+							<div class="banner-info">
+								<h3>The Batman</h3>
+								<p>When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.</p>
+								<a href="#small-dialog2" class="popup-with-zoom-anim play-view1">
+									<span class="video-play-icon">
+										<span class="fa fa-play"></span>
+									</span>
+									<h6>Watch Trailer</h6>
+								</a>
+								<div id="small-dialog2" class="zoom-anim-dialog mfp-hide">
+									<iframe src="https://player.vimeo.com/video/660408476" allow="autoplay; fullscreen"
+										allowfullscreen=""></iframe>
+								</div>
+							</div>
+						</div>
+					</li>
+				</div>
+				<div class="item">
+					<li>
+						<div class="slider-info banner-view banner-top2 bg bg2" style="background-image: url(https://images3.alphacoders.com/121/1219357.jpg)">
+							<div class="banner-info">
+								<h3>Turning Red</h3>
+								<p>A 13-year-old girl named Meilin turns into a giant red panda whenever she gets too excited.</p>
+								<a href="#small-dialog3" class="popup-with-zoom-anim play-view1">
+									<span class="video-play-icon">
+										<span class="fa fa-play"></span>
+									</span>
+									<h6>Watch Trailer</h6>
+								</a>
+								<div id="small-dialog3" class="zoom-anim-dialog mfp-hide">
+									<iframe src="https://player.vimeo.com/video/574767125" allow="autoplay; fullscreen"
+										allowfullscreen=""></iframe>
+								</div>
+							</div>
+						</div>
+					</li>
+				</div>
+				<div class="item">
+					<li>
+						<div class="slider-info banner-view banner-top3 bg bg2" style="background-image: url(https://wallpapercave.com/wp/wp10569306.jpg)">
+							<div class="banner-info">
+								<h3>Moonfall</h3>
+								<p>A mysterious force knocks the moon from its orbit around Earth and sends it hurtling on a collision course with life as we know it.</p>
+								<a href="#small-dialog4" class="popup-with-zoom-anim play-view1">
+									<span class="video-play-icon">
+										<span class="fa fa-play"></span>
+									</span>
+									<h6>Watch Trailer</h6>
+								</a>
+								<div id="small-dialog4" class="zoom-anim-dialog mfp-hide">
+									<iframe src="https://player.vimeo.com/video/663084099" allow="autoplay; fullscreen"
+										allowfullscreen=""></iframe>
+								</div>
+							</div>
+						</div>
+					</li>
+				</div>
+			</div>
+		</div>
+	</section>
     <!-- main-slider -->
     <!--grids-sec1-->
     <section class="w3l-grids">
@@ -118,28 +178,24 @@
             <div class="owl-mid owl-carousel owl-theme">
                 <div class="item">
                     <li>
-                        <div class="slider-info mid-view bg bg2">
-                            <div class="container">
-                                <div class="mid-info">
-                                    <span class="sub-text">Comedy</span>
-                                    <h3>Jumanji: The Next Level</h3>
-                                    <p>2019 ‧ Comedy/Action ‧ 2h 3m</p>
-                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play"
-                                            aria-hidden="true"></span>
-                                        Watch Trailer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info mid-view mid-top1 bg bg2">
+                        <div class="slider-info mid-view bg bg2" style="background-image: url(https://images4.alphacoders.com/120/1205664.jpg)">
                             <div class="container">
                                 <div class="mid-info">
                                     <span class="sub-text">Adventure</span>
-                                    <h3>Dolittle</h3>
-                                    <p>2020 ‧ Family/Adventure ‧ 1h 41m</p>
+                                    <h3>Uncharted</h3>
+                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="item">
+                    <li>
+                        <div class="slider-info mid-view mid-top1 bg bg2" style="background-image: url(https://www.gamespot.com/a/uploads/original/1600/16003485/3917523-screenshot2021-12-13at10.43.36am.png)">
+                            <div class="container">
+                                <div class="mid-info">
+                                    <span class="sub-text">Fantasy</span>
+                                    <h3>Fantastic Beasts: The Secrets of Dumbledore</h3>
                                     <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play"
                                             aria-hidden="true"></span>
                                         Watch Trailer</a>
@@ -150,15 +206,12 @@
                 </div>
                 <div class="item">
                     <li>
-                        <div class="slider-info mid-view mid-top2 bg bg2">
+                        <div class="slider-info mid-view mid-top2 bg bg2" style="background-image: url(https://www.moviechant.com/media/images/2022/03/04/all-the-old-knives-movie-screenshots_Z1VTCBX.jpg)">
                             <div class="container">
                                 <div class="mid-info">
                                     <span class="sub-text">Action</span>
-                                    <h3>Bad Boys for Life</h3>
-                                    <p>2020 ‧ Comedy/Action ‧ 2h 4m</p>
-                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play"
-                                            aria-hidden="true"></span>
-                                        Watch Trailer</a>
+                                    <h3>All the Old Knives</h3>
+                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play" aria-hidden="true"></span> Watch Trailer</a>
                                 </div>
                             </div>
                         </div>

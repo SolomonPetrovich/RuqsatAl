@@ -119,6 +119,9 @@ class Ticket(models.Model):
     movie = models.ForeignKey('Movie', models.DO_NOTHING)
     session = models.ForeignKey('Session', models.DO_NOTHING)
 
+    def __str__(self):
+        return self.session + ' ' + self.movie + ' ' + self.hall_seats + ' ' + self.price
+
     class Meta:
         verbose_name = 'Ticket'
         verbose_name_plural = 'Tickets'
@@ -128,6 +131,10 @@ class Booking(models.Model):
     ticket = models.ForeignKey('Ticket', models.DO_NOTHING)
     user = models.ForeignKey('User', models.DO_NOTHING)
 
+    def __str__(self):
+        return self.user + ' ' + self.ticket
+
     class Meta:
         verbose_name = 'Booking'
         verbose_name_plural = 'Bookings'
+

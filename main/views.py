@@ -2,25 +2,35 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from .models import *
-from .forms import CustomLoginUserForm, CustomRegisterUserForm
+from .forms import *
 from django.views.generic import *
+from django.core.mail import send_mail
 
 
-class HomeView(ListView):
-    model = Movie
-    template_name = 'main/index.html'
-    genres = Genres.objects.all()
+def contact(request):
+    if request.method == 'POST':
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        msg = request.POST.get('msg')
 
-    def get_context_data(self, genres=genres,**kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Home'
-        context['genres'] = genres
-        return context
+        data = {
+            'fname': fname,
+            'lname': lname,
+            'email': email,
+            'subject': subject,
+            'msg': msg
+        }
+        print(data)
+        message = f'''
+        New message:{data['msg']}
+        From : {data['email']}
+        '''
+        send_mail(subject, message, '', ['solizholdasbai@gmail.com'])
 
-
-class ContactView(View):
-    template_name = 'main/Contact_Us.html'
+    context = {'title': 'Contact Us'}
+    return render(request, 'main/Contact_Us.html', context)
 
 
 def about(request):
@@ -40,6 +50,36 @@ def e_ticket(request):
 
 def profile(request):
     return render(request, 'main/profile.html')
+
+
+def show_genre(request, pk):
+    genre = Genres.objects.get(pk=pk)
+    movies = Movie.objects.all()
+    genres = Genres.objects.all()
+    context = {'title': genre,
+               'movies': movies,
+               'genres': genres}
+    return render(request, 'main/movie_genre.html', context)
+
+
+def show_movie(request):
+    title = request.GET.get('search')
+    movies = Movie.objects.filter(title__contains=title)
+    context = {'title': 'Searching: ' + title,
+               'movies': movies}
+    return render(request, 'main/movie.html', context)
+
+
+class HomeView(ListView):
+    model = Movie
+    template_name = 'main/index.html'
+    genres = Genres.objects.all()
+
+    def get_context_data(self, genres=genres,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Home'
+        context['genres'] = genres
+        return context
 
 
 class RegisterView(CreateView):
@@ -93,24 +133,6 @@ class MovieView(ListView):
         context['title'] = 'Movies'
         context['genres'] = genres
         return context
-
-
-def show_genre(request, pk):
-    genre = Genres.objects.get(pk=pk)
-    movies = Movie.objects.all()
-    genres = Genres.objects.all()
-    context = {'title': genre,
-               'movies': movies,
-               'genres': genres}
-    return render(request, 'main/movie_genre.html', context)
-
-
-def show_movie(request):
-    title = request.GET.get('search')
-    movies = Movie.objects.filter(title__contains=title)
-    context = {'title': 'Searching: ' + title,
-               'movies': movies}
-    return render(request, 'main/movie.html', context)
 
 
 class MovieGenreView(ListView):

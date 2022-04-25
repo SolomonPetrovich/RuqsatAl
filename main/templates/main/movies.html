@@ -5,11 +5,11 @@
     <section class="w3l-grids">
         <div class="grids-main py-5">
             <div class="container py-lg-4">
-            {% for genre in genres %}
+            {% for movie in movie_list %}
                 <div class="headerhny-title">
                     <div class="w3l-title-grids">
                         <div class="headerhny-left">
-                            <h3 class="hny-title">{{ genre }}</h3>
+                            <h3 class="hny-title">{{ movie }}</h3>
                         </div>
                         <div class="headerhny-right text-lg-right">
                             <h4><a class="show-title" href="">Show all</a></h4>
@@ -17,9 +17,7 @@
                     </div>
                 </div>
                 <div class="w3l-populohny-grids">
-                {% for movie in movie_list %}
                     {% for item in movie %}
-                        {% if genre in item.genres.all %}
                         <div class="item vhny-grid">
                             <div class="box16 mb-0">
                                 <a href=".{{ item.title }}">
@@ -66,8 +64,6 @@
                                 </div>
                             </div>
                         </div>
-                        {% endif %}
-                    {% endfor %}
                     {% endfor %}
                 </div>
             {% endfor %}

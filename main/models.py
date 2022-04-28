@@ -89,15 +89,6 @@ class User(AbstractUser):
         return self.username
 
 
-class Favorites(models.Model):
-    movie = models.ForeignKey('Movie', models.DO_NOTHING)
-    user = models.ForeignKey('User', models.DO_NOTHING)
-
-    class Meta:
-        verbose_name = 'Favorite'
-        verbose_name_plural = 'Favorites'
-
-
 class Session(models.Model):
     name = models.CharField(max_length=150)
     date = models.DateField()

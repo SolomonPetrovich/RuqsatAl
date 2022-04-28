@@ -75,6 +75,13 @@ class MovieView(ListView):
         return context
 
 
+def movie_detail(request, pk):
+    movie = Movie.objects.get(pk=pk)
+    context = {'title': movie.title,
+               'movie': movie}
+    return render(request, 'main/movie_detail.html', context)
+
+
 def show_genre(request, pk):
     genre = Genres.objects.get(pk=pk)
     movies = Movie.objects.all()
@@ -138,7 +145,8 @@ def profile(request):
     return render(request, 'main/profile.html')
 
 
-def ticket_booking(request):
+def ticket_booking(request, pk):
+    movie = Movie.objects.get(pk=pk)
     return render(request, 'main/ticket-booking.html')
 
 

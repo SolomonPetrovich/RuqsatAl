@@ -109,17 +109,17 @@
                     {% for item in popular_movies %}
                     <div class="item vhny-grid">
                         <div class="box16">
-                            <a href="{% url 'movies' %}">
+                            <a href="{% url 'movie_detail' pk=item.pk %}">
                                 <figure>
                                     <img class="img-fluid" src="{{ item.poster_path }}" alt="">
                                 </figure>
                                 <div class="box-content">
                                     <h3 class="title">{{ item.title }}</h3>
                                     <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }} </span>
-                                        <span class="post fa fa-heart text-right"></span>
+                                        <span class="post fa fa-fa-heart-o text-right"></span>
                                     </h4>
                                 </div>
-                                <span class="fa fa-play video-icon" aria-hidden="true"></span>
+                                <span class="" aria-hidden="true"></span>
                             </a>
                         </div>
                     </div>
@@ -153,15 +153,15 @@
                                 </figure>
                                 <div class="box-content">
                                     <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }} </span>
-                                        <span class="post fa fa-heart text-right"></span>
+                                        <span class="post fa fa-heart-o text-right"></span>
                                     </h4>
                                 </div>
-                                <span class="fa fa-play video-icon" aria-hidden="true"></span>
+                                <span class="" aria-hidden="true"></span>
                             </a>
                         </div>
-                        <h3> <a class="title-gd" href="{% url 'movies' %}">{{ item.title }}</a></h3>
+                        <h3> <a class="title-gd" href="{% url 'movie_detail' pk=item.pk %}">{{ item.title }}</a></h3>
                         <div class="button-center text-center mt-4">
-                            <a href="{% url 'movies' %}" class="btn watch-button">Watch now</a>
+                            <a href="{% url 'movie_detail' pk=item.pk %}" class="btn watch-button">Book now</a>
                         </div>
 
                     </div>
@@ -183,7 +183,7 @@
                                 <div class="mid-info">
                                     <span class="sub-text">Adventure</span>
                                     <h3>Uncharted</h3>
-                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
+                                    <a class="watch" href="https://player.vimeo.com/video/642301892"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                                 <div class="mid-info">
                                     <span class="sub-text">Fantasy</span>
                                     <h3>Fantastic Beasts: The Secrets of Dumbledore</h3>
-                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play"
+                                    <a class="watch" href="https://player.vimeo.com/video/656211853"><span class="fa fa-play"
                                             aria-hidden="true"></span>
                                         Watch Trailer</a>
                                 </div>
@@ -211,7 +211,7 @@
                                 <div class="mid-info">
                                     <span class="sub-text">Action</span>
                                     <h3>All the Old Knives</h3>
-                                    <a class="watch" href="{% url 'movies' %}"><span class="fa fa-play" aria-hidden="true"></span> Watch Trailer</a>
+                                    <a class="watch" href="https://player.vimeo.com/video/695088356"><span class="fa fa-play" aria-hidden="true"></span> Watch Trailer</a>
                                 </div>
                             </div>
                         </div>

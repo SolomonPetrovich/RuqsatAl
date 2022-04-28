@@ -10,10 +10,11 @@ urlpatterns = [
     path('login/', LoginUserView.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('ticket_booking/', ticket_booking, name='ticket_booking'),
+    path('ticket_booking/<int:pk>', ticket_booking, name='ticket_booking'),
     path('seat_seal/', seat_seat, name='seat_seal'),
     path('movies/', MovieView.as_view(), name='movies'),
     path('genre/<int:pk>', show_genre, name='movies_genre'),
+    path('movie_detail/<int:pk>', movie_detail, name='movie_detail'),
     path('movie/', show_movie, name='movie'),
     path('profile/', profile, name='profile')
 ]

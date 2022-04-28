@@ -16,14 +16,14 @@
                     {% for movie in movie_list %}
                         <div class="item vhny-grid">
                             <div class="box16 mb-0">
-                                <a href=".{{ movie.title }}">
+                                <a href="{% url 'movie_detail' pk=movie.pk %}">
                                     <figure>
                                         <img class="img-fluid" src="{{ movie.poster_path }}" alt="">
                                     </figure>
                                     <div class="box-content">
                                         <h3 class="title">{{ movie.title }}</h3>
                                         <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date }}</span>
-                                            <span class="post fa fa-heart text-right"></span>
+                                            <span class="post fa fa-heart-o text-right"></span>
                                         </h4>
                                     </div>
                                 </a>
@@ -124,7 +124,7 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart text-right"></span>
+                                                    <span class="post fa fa-heart-o text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart text-right"></span>
+                                                    <span class="post fa fa-heart-o text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -180,7 +180,7 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart text-right"></span>
+                                                    <span class="post fa fa-heart-o text-right"></span>
                                                 </h4>
                                             </div>
                                         </div>

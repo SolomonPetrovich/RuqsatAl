@@ -16,5 +16,6 @@ urlpatterns = [
     path('genre/<int:pk>', show_genre, name='movies_genre'),
     path('movie_detail/<int:pk>', movie_detail, name='movie_detail'),
     path('movie/', show_movie, name='movie'),
-    path('profile/', profile, name='profile')
+    path('profile/', profile, name='profile'),
+    path('favorites/<int:id>', addToFavorites, name='addtofavs')
 ]

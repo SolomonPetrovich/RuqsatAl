@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import *
 from django.views.generic import *
@@ -51,6 +52,7 @@ class LoginUserView(LoginView):
         return context
 
 
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('login')
@@ -67,11 +69,16 @@ class MovieView(ListView):
 
     def get_context_data(self, genres=genres, recent=recent, popular=popular, trend=Trend, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.user.is_anonymous:
+            favs = Favorites.objects.all()
+        else:
+            favs = Favorites.objects.filter(user=self.request.user).values_list('movie__title', flat=True)
         context['title'] = 'Movies'
         context['genres'] = genres
         context['recent'] = recent
         context['popular'] = popular
         context['trend'] = trend
+        context['favs'] = favs
         return context
 
 
@@ -137,12 +144,34 @@ def about(request):
     return render(request, 'main/about.html', context)
 
 
+@login_required
+def addToFavorites(request, id):
+    movie = Movie.objects.get(id=id)
+    user = User.objects.get(id=request.user.id)
+    if not Favorites.objects.all().filter(user=user, movie=movie):
+        try:
+            Favorites.objects.create(user=user, movie=movie)
+        except:
+            return redirect('home')
+    else:
+        try:
+            m = Favorites.objects.all().filter(user=user, movie=movie)
+            m.delete()
+        except:
+            return redirect('home')
+    return redirect('movies')
+
+
 def e_ticket(request):
     return render(request, 'main/e-ticket.html')
 
 
+@login_required
 def profile(request):
-    return render(request, 'main/profile.html')
+    favs = Favorites.objects.all().filter(user=request.user)
+    context = {'title': request.user.username,
+               'favs' : favs}
+    return render(request, 'main/profile.html', context)
 
 
 def ticket_booking(request, pk):

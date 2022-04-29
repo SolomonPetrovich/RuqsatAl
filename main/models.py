@@ -129,3 +129,14 @@ class Booking(models.Model):
         verbose_name = 'Booking'
         verbose_name_plural = 'Bookings'
 
+
+class Favorites(models.Model):
+    movie = models.ForeignKey('Movie', models.CASCADE)
+    user = models.ForeignKey('User', models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Favorite'
+        verbose_name_plural = 'Favorites'
+
+    def __str__(self):
+        return self.user.username + ' ' + self.movie.title

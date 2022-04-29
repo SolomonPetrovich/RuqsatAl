@@ -23,41 +23,16 @@
                                     <div class="box-content">
                                         <h3 class="title">{{ movie.title }}</h3>
                                         <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date }}</span>
-                                            <span class="post fa fa-heart-o text-right"></span>
+                                            <a href="{% url 'addtofavs' movie.id %}" class="text-right">
+                                                {% if movie.title in favs %}
+                                                    <span class="post fa fa-heart text-right"></span>
+                                                {% else %}
+                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                {% endif %}
+                                            </a>
                                         </h4>
                                     </div>
                                 </a>
-                                <div class="modal fade {{ movie.title }}" id="myModal" tabindex="-1" role="dialog"
-								aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content" id="mymodalcontent">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLongTitle">DETAILS</h4>
-                                                <button type="button" class="closebtn" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body" id="dynamic-content">
-                                                <img src="{{ movie.poster_path }}" class="img-fluid modalimg" alt="" />
-                                                <p>
-                                                    <h3>Original Title&nbsp;: {{ movie.original_title }}</h3>
-                                                    <h3>Genres &nbsp;: {{ movie.genres.all }}</h3>
-                                                    <h3>Rating &nbsp;: {{ movie.vote_average }}</h3>
-                                                    <h3>Popolarity &nbsp;: {{ movie.popularity }}</h3>
-                                                </p>
-                                                <h4>About Movie</h4>
-                                                <p>
-                                                    {{ item.overview }}
-                                                </p>
-                                            </div>
-                                            <div class="bookbtn">
-                                                <button type="button" class="btn btn-success"
-                                                    onclick="location.href='ticket-booking.html';">Book</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     {% endfor %}
@@ -124,7 +99,13 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                        {% if item.title in favs %}
+                                                            <span class="post fa fa-heart text-right"></span>
+                                                        {% else %}
+                                                            <span class="post fa fa-heart-o text-right"></span>
+                                                        {% endif %}
+                                                    </a>
                                                 </h4>
                                             </div>
                                         </div>
@@ -152,7 +133,13 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                        {% if item.title in favs %}
+                                                            <span class="post fa fa-heart text-right"></span>
+                                                        {% else %}
+                                                            <span class="post fa fa-heart-o text-right"></span>
+                                                        {% endif %}
+                                                    </a>
                                                 </h4>
                                             </div>
                                         </div>
@@ -168,11 +155,9 @@
                                         <div class="slider-info">
                                             <div class="img-circle">
                                                 <a href="{%  url 'movies' %}">
-
                                                     <img src="{{ item.poster_path }}" class="img-fluid"
                                                         alt="author image">
                                                     <div class="overlay-icon">
-
                                                         <span class="fa fa-play video-icon" aria-hidden="true"></span>
                                                     </div>
                                                 </a>
@@ -180,7 +165,13 @@
                                             <div class="message">
                                                 <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
                                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                        {% if item.title in favs %}
+                                                            <span class="post fa fa-heart text-right"></span>
+                                                        {% else %}
+                                                            <span class="post fa fa-heart-o text-right"></span>
+                                                        {% endif %}
+                                                    </a>
                                                 </h4>
                                             </div>
                                         </div>

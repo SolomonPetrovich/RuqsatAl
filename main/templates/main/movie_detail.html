@@ -13,7 +13,7 @@
                     <h3 class="hny-title">{{ movie.title }}</h3>
                     <p class="mt-3">Original Title: {{ movie.original_title }}</p>
                     <p class="mt-3">Original Language:{{ movie.original_language }}</p>
-                    <p class="mt-3">Genres: {{ movie.genres }}</p>
+                    <p class="mt-3">Genres: {{ movie.genres.all }}</p>
                     <p class="mt-3">Release Date: {{ movie.release_date }}</p>
                     <p class="mt-3">Popularity: {{ movie.popularity }}</p>
                     <p class="mt-3">Rating: {{ movie.vote_average }}</p>
@@ -22,6 +22,33 @@
                 <div class="bookbtn">
                     <a href="{% url 'ticket_booking' pk=movie.pk %}"><button type="button" class="btn btn-success">Book</button></a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-center">
+                    Comment
+                </h2>
+            </div>
+            <div class="col-lg-6">
+                <div id="comment-field"></div>
+            </div>
+            <div class="col-lg-6">
+                <form>
+                    <div class="form-group">
+                        <label for="comment-name">Name:</label>
+                        <input type="email" class="form-control" id="comment-name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-body">Comment:</label>
+                        <textarea type="password" class="form-control" id="comment-body" placeholder="comment"></textarea>
+                    </div>
+                    <div class="form-group form-check text-right">
+                        <button type="submit" id="comment-add" class="btn btn-primary">add Comment</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

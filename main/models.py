@@ -14,10 +14,11 @@ class Hall(models.Model):
 
 
 class Seat(models.Model):
-    name = models.CharField(max_length=150)
+    row = models.IntegerField(default=None)
+    number = models.IntegerField(default=None)
 
     def __str__(self):
-        return self.name
+        return self.row + 'row : ' + self.number
 
     class Meta:
         verbose_name = 'Seat'

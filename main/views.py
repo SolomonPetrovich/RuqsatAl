@@ -176,7 +176,11 @@ def profile(request):
 
 def ticket_booking(request, pk):
     movie = Movie.objects.get(pk=pk)
-    return render(request, 'main/ticket-booking.html')
+    seat = 'main/seat_seal.html'
+    context = {'title': 'Booking',
+               'movie_id': movie.id,
+               'seat': seat}
+    return render(request, 'main/ticket-booking.html', context)
 
 
 def seat_seat(request):

@@ -91,7 +91,6 @@ class User(AbstractUser):
 
 
 class Session(models.Model):
-    name = models.CharField(max_length=150)
     date = models.DateField()
     time = models.TimeField()
     category = models.ForeignKey('Category', models.DO_NOTHING)

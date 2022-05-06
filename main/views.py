@@ -52,7 +52,7 @@ class LoginUserView(LoginView):
         return context
 
 
-@login_required
+@login_required(login_url='login')
 def logout_user(request):
     logout(request)
     return redirect('login')
@@ -84,8 +84,13 @@ class MovieView(ListView):
 
 def movie_detail(request, pk):
     movie = Movie.objects.get(pk=pk)
+    genres = Genres.objects.all()
+    movie_genres = movie.genres.values_list('name', flat=True)
     context = {'title': movie.title,
-               'movie': movie}
+               'movie': movie,
+               'movie_genres': movie_genres,
+               'genres': genres
+               }
     return render(request, 'main/movie_detail.html', context)
 
 
@@ -100,10 +105,12 @@ def show_genre(request, pk):
 
 
 def show_movie(request):
+    genres = Genres.objects.all()
     title = request.GET.get('search')
     movies = Movie.objects.filter(title__contains=title)
     context = {'title': 'Searching: ' + title,
-               'movies': movies}
+               'movies': movies,
+               'genres': genres}
     return render(request, 'main/movie_search.html', context)
 
 
@@ -144,7 +151,7 @@ def about(request):
     return render(request, 'main/about.html', context)
 
 
-@login_required
+@login_required(login_url='login')
 def addToFavorites(request, id):
     movie = Movie.objects.get(id=id)
     user = User.objects.get(id=request.user.id)
@@ -166,7 +173,7 @@ def e_ticket(request):
     return render(request, 'main/e-ticket.html')
 
 
-@login_required
+@login_required(login_url='login')
 def profile(request):
     favs = Favorites.objects.all().filter(user=request.user)
     context = {'title': request.user.username,
@@ -174,12 +181,20 @@ def profile(request):
     return render(request, 'main/profile.html', context)
 
 
+@login_required(login_url='login')
 def ticket_booking(request, pk):
     movie = Movie.objects.get(pk=pk)
-    seat = 'main/seat_seal.html'
+    days = []
+    for i in range(3):
+        days.append(movie.release_date.day + i)
+
+    print(movie.release_date)
+    print(type(movie.release_date))
+
     context = {'title': 'Booking',
-               'movie_id': movie.id,
-               'seat': seat}
+               'movie': movie,
+               'days': days
+               }
     return render(request, 'main/ticket-booking.html', context)
 
 

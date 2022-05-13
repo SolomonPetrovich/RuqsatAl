@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/progress.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/e-ticket.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/payment.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/ticket-booking.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container" id="progress-container-id">
+        <div class="row">
+            <div class="col">
+                <div class="px-0 pt-4 pb-0 mt-3 mb-3">
+                    {% block steps %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+    <script type="text/javascript" src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="{% static 'assets/js/theme-change.js' %}"></script>
+    <script src="{% static 'assets/js/ticket-booking.js' %}"></script>
+{% endblock %}

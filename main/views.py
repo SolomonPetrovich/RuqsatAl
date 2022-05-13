@@ -1,6 +1,9 @@
+import datetime
+
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import *
@@ -16,7 +19,8 @@ class HomeView(ListView):
     popular_movies = Movie.objects.all().order_by('vote_average')[:4]
     new_movies = Movie.objects.all().order_by('-release_date')[:19]
 
-    def get_context_data(self, genres=genres, header_movies=header_movies, popular_movies=popular_movies, new_movies=new_movies,**kwargs):
+    def get_context_data(self, genres=genres, header_movies=header_movies, popular_movies=popular_movies,
+                         new_movies=new_movies, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Home'
         context['genres'] = genres
@@ -129,7 +133,6 @@ def contact(request):
             'subject': subject,
             'msg': msg
         }
-        print(data)
         message = f'''
         New message:{data['msg']}
         From : {data['email']}
@@ -169,34 +172,71 @@ def addToFavorites(request, id):
     return redirect('movies')
 
 
-def e_ticket(request):
-    return render(request, 'main/e-ticket.html')
-
-
 @login_required(login_url='login')
 def profile(request):
     favs = Favorites.objects.all().filter(user=request.user)
     context = {'title': request.user.username,
-               'favs' : favs}
+               'favs': favs}
     return render(request, 'main/profile.html', context)
 
 
-@login_required(login_url='login')
-def ticket_booking(request, pk):
-    movie = Movie.objects.get(pk=pk)
-    days = []
-    for i in range(3):
-        days.append(movie.release_date.day + i)
+def booking(request, pk):
+    sessions = Session.objects.filter(movie_id=pk).values()
+    dates = sessions.values_list('date', flat=True).distinct('date')
 
-    print(movie.release_date)
-    print(type(movie.release_date))
+    context = {
+        'title': 'Booking',
+        'sessions': sessions,
+        'dates': dates
+    }
 
-    context = {'title': 'Booking',
-               'movie': movie,
-               'days': days
-               }
-    return render(request, 'main/ticket-booking.html', context)
+    return render(request, 'main/booking.html', context)
 
 
-def seat_seat(request):
-    return render(request, 'main/seat_sel.html')
+def select_seat(request, pk):
+    session = Session.objects.get(pk=pk)
+    context = {
+        'title': 'Seat Selection',
+        'session': session
+    }
+    return render(request, 'main/booking2.html', context)
+
+
+def seat_seal(request, pk):
+    session = Session.objects.get(pk=pk)
+    sold_seats = Booking.objects.filter(session__pk=pk).values_list('seat', flat=True)
+    s = list(sold_seats)
+    ssss = Seat.objects.filter(id__in=s)
+
+    context = {
+        'title': 'Booking',
+        'sold_seats': ssss,
+        'session': session
+    }
+    return render(request, 'main/seat_sel.html', context)
+
+
+def topay(request):
+    if request.method == 'POST':
+        ids = []
+        seats_selected = request.POST['seats'].split(',')
+        seats = Seat.objects.all()
+        for i in seats_selected:
+            ids.append(seats.get(row=int(i[:i.find('_')]), number=int(i[i.find('_') + 1:])))
+        user = User.objects.get(id=request.user.id)
+        session = Session.objects.get(id=int(request.POST['session_id']))
+        b = Booking.objects.create(user=user, session=session, is_paied=True, booked_datetime=datetime.datetime.now())
+        b.seat.set(ids)
+        b.save()
+        return JsonResponse(data={'ans': 'success'})
+
+
+def ticket(request, session_pk):
+    booking = Booking.objects.get(session__pk=session_pk)
+    booking.save()
+    print(booking)
+    context ={
+        'title': 'Ticket',
+        'booking': booking
+    }
+    return render(request, 'main/ticket.html', context)

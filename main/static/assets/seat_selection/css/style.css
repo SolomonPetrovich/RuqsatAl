@@ -695,3 +695,17 @@ ul.book-left li {
 		font-size: 13px;
 	}
 }
+
+.next-step {
+	width: min-content;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 0px;
+	cursor: pointer;
+	font-size: 0.8rem;
+	padding: 10px 35px;
+	margin: 10px 5px 10px 0px;
+	float: right;
+	border-radius: 22px;
+}

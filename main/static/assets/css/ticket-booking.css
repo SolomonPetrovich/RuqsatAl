@@ -207,20 +207,46 @@ h2 {
 	float: right;
 	border-radius: 22px;
 	background: var(--theme-rose);
-	background: #616161; 
+	background: #616161;
 }
 
-#form .cancel-pay-btn:hover, 
-#form .cancel-pay-btn:focus { 
+#form .cancel-pay-btn:hover,
+#form .cancel-pay-btn:focus {
 	background-color: #da0000
-} 
+}
 
-#form .pay-btn:hover, 
-#form .pay-btn:focus { 
-	background: rgb(0, 170, 9); 
-} 
+#form .pay-btn:hover,
+#form .pay-btn:focus {
+	background: rgb(0, 170, 9);
+}
 
-#form .home-page-btn:hover, 
-#form .home-page-btn:focus { 
+#form .home-page-btn:hover,
+#form .home-page-btn:focus {
 	background-color: #c70050;
+}
+.form_radio_btn {
+	display: inline-block;
+	margin-right: 10px;
+}
+.form_radio_btn input[type=radio] {
+	display: none;
+}
+.form_radio_btn label {
+	display: inline-block;
+	cursor: pointer;
+	padding: 0px 15px;
+	line-height: 34px;
+	border: 1px solid #999;
+	border-radius: 6px;
+	user-select: none;
+}
+
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+	background: #c70050;
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+	color: #c70050;
 }

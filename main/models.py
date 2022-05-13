@@ -2,6 +2,18 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=150)
+    price = models.IntegerField(default=None)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+
 class Hall(models.Model):
     name = models.CharField(max_length=150)
 
@@ -14,38 +26,15 @@ class Hall(models.Model):
 
 
 class Seat(models.Model):
-    row = models.IntegerField(default=None)
-    number = models.IntegerField(default=None)
+    row = models.IntegerField()
+    number = models.IntegerField()
 
     def __str__(self):
-        return self.row + 'row : ' + self.number
+        return str(self.row) + '_' + str(self.number)
 
     class Meta:
         verbose_name = 'Seat'
         verbose_name_plural = 'Seats'
-
-
-class HallSeat(models.Model):
-    seat = models.ForeignKey('Seat', models.DO_NOTHING)
-    hall = models.ForeignKey('Hall', models.DO_NOTHING)
-
-    def __str__(self):
-        return self.hall + ' : ' + self.seat
-
-    class Meta:
-        verbose_name = 'HeallSeat'
-        verbose_name_plural = 'HallSeats'
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
 
 
 class Genres(models.Model):
@@ -91,39 +80,28 @@ class User(AbstractUser):
 
 
 class Session(models.Model):
-    date = models.DateField()
-    time = models.TimeField()
-    category = models.ForeignKey('Category', models.DO_NOTHING)
-    movie = models.ForeignKey('Movie', models.DO_NOTHING)
+    date = models.DateField(default=None)
+    time = models.TimeField(default=None)
+    hall = models.ForeignKey('Hall', models.CASCADE)
+    movie = models.ForeignKey('Movie', models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.movie.title + ' ' + str(self.date) + ' ' + str(self.time)
 
     class Meta:
         verbose_name = 'Session'
         verbose_name_plural = 'Sessions'
 
 
-class Ticket(models.Model):
-    price = models.CharField(max_length=150)
-    hall_seats = models.ForeignKey('HallSeat', models.DO_NOTHING)
-    movie = models.ForeignKey('Movie', models.DO_NOTHING)
-    session = models.ForeignKey('Session', models.DO_NOTHING)
-
-    def __str__(self):
-        return self.session + ' ' + self.movie + ' ' + self.hall_seats + ' ' + self.price
-
-    class Meta:
-        verbose_name = 'Ticket'
-        verbose_name_plural = 'Tickets'
-
-
 class Booking(models.Model):
-    ticket = models.ForeignKey('Ticket', models.DO_NOTHING)
-    user = models.ForeignKey('User', models.DO_NOTHING)
+    session = models.ForeignKey('Session', models.CASCADE)
+    seat = models.ManyToManyField('Seat')
+    user = models.ForeignKey('User', models.CASCADE)
+    booked_datetime = models.DateTimeField(default=None)
+    is_paied = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user + ' ' + self.ticket
+        return str(self.user)
 
     class Meta:
         verbose_name = 'Booking'

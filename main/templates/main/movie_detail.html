@@ -33,17 +33,20 @@
                 </h2>
             </div>
             <div class="col-lg-6">
-                <div id="comment-field"></div>
+                <div id="comment-field">
+                    {% for comment in comments %}
+                        <p class="text-right small"><em>{{ comment.datetime }}</em></p>
+                        <p class="alert alert-primary" role="alert">{{ comment.user }}</p>
+                        <p class="alert alert-success" role="alert">{{ comment.message }}</p>
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-lg-6">
-                <form>
-                    <div class="form-group">
-                        <label for="comment-name">Name:</label>
-                        <input type="email" class="form-control" id="comment-name" placeholder="Enter your name">
-                    </div>
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="comment-body">Comment:</label>
-                        <textarea type="password" class="form-control" id="comment-body" placeholder="comment"></textarea>
+                        <textarea name="comment" type="password" class="form-control" id="comment-body" placeholder="comment"></textarea>
                     </div>
                     <div class="form-group form-check text-right">
                         <button type="submit" id="comment-add" class="btn btn-primary">add Comment</button>

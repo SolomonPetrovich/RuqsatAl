@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block style %}
+{% endblock style %}
+{% block content %}
+<div class="container">
+    {% if result %}
+    <div class="content">
+        <img src="{% static 'assets/fonts/check-solid.svg' %}">
+    </div>
+    {% else %}
+    <div class="content">
+        <img src="{% static 'assets/fonts/xmark-solid.svg' %}">
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
+{% block scripts %}
+{% endblock %}

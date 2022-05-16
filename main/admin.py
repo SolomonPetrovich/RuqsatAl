@@ -9,6 +9,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User)
+admin.site.register(Comment)
 admin.site.register(Category)
 admin.site.register(Booking)
 admin.site.register(Hall)

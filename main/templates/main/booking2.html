@@ -15,11 +15,10 @@
                 <div class="col">
                     <div class="px-0 pt-4 pb-0 mt-3 mb-3">
                         <form id="form">
-                            <ul id="progressbar" class="progressbar-class">
-                                <li class="active" id="step1">Show timing selection</li>
+                            <ul id="progressbar" class="progressbar-class" style="justify-content: center">
+                                <li id="step1" class="active">Show timing selection</li>
                                 <li id="step2" class="active">Seat Selection</li>
                                 <li id="step3" class="not_active">Payment</li>
-                                <li id="step4" class="not_active">E-Ticket</li>
                             </ul>
                             <br>
                             <fieldset>
@@ -101,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{% url 'ticket' session_pk=session.pk %}"><input type="button" name="next-step" class="next-step pay-btn" value="Confirm Payment" /></a>
+                                <a href="{% url 'home' %}"><input type="button" name="next-step" class="next-step pay-btn" value="Confirm Payment" /></a>
                                 <input type="button" name="previous-step" class="cancel-pay-btn" value="Cancel Payment"
                                        onclick="location.href='{% url 'home' %}';" />
                             </fieldset>

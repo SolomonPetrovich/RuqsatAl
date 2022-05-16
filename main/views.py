@@ -1,14 +1,20 @@
 import datetime
+import threading
 
+import cv2
+from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse, StreamingHttpResponse
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.decorators import gzip
+from pyzbar.pyzbar import decode
 from .forms import *
 from django.views.generic import *
 from django.core.mail import send_mail
+from .utils import embed_QR
 
 
 class HomeView(ListView):
@@ -76,7 +82,8 @@ class MovieView(ListView):
         if self.request.user.is_anonymous:
             favs = Favorites.objects.all()
         else:
-            favs = Favorites.objects.filter(user=self.request.user).values_list('movie__title', flat=True)
+            favs = Favorites.objects.filter(
+                user=self.request.user).values_list('movie__title', flat=True)
         context['title'] = 'Movies'
         context['genres'] = genres
         context['recent'] = recent
@@ -88,13 +95,25 @@ class MovieView(ListView):
 
 def movie_detail(request, pk):
     movie = Movie.objects.get(pk=pk)
+    comments = Comment.objects.filter(movie=movie)
     genres = Genres.objects.all()
     movie_genres = movie.genres.values_list('name', flat=True)
+
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        message = request.POST.get('comment')
+
+        comment = Comment.objects.create(user=user, movie=movie, message=message)
+        if comment.save():
+            return redirect('movie_detail', id)
+
     context = {'title': movie.title,
                'movie': movie,
                'movie_genres': movie_genres,
-               'genres': genres
+               'genres': genres,
+               'comments': comments
                }
+               
     return render(request, 'main/movie_detail.html', context)
 
 
@@ -175,11 +194,32 @@ def addToFavorites(request, id):
 @login_required(login_url='login')
 def profile(request):
     favs = Favorites.objects.all().filter(user=request.user)
-    context = {'title': request.user.username,
-               'favs': favs}
+    tickets = Booking.objects.all().filter(user=request.user)
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        user = User.objects.get(id=request.user.id)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.phone = phone
+        print(user.last_name)
+        if user.save():
+            messages.error(request, 'Updated Successfully!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'PLease try again')
+
+    context = {'title': 'Profile',
+               'favs': favs,
+               'tickets': tickets
+               }
     return render(request, 'main/profile.html', context)
 
 
+@login_required(login_url='login')
 def booking(request, pk):
     sessions = Session.objects.filter(movie_id=pk).values()
     dates = sessions.values_list('date', flat=True).distinct('date')
@@ -193,6 +233,7 @@ def booking(request, pk):
     return render(request, 'main/booking.html', context)
 
 
+@login_required(login_url='login')
 def select_seat(request, pk):
     session = Session.objects.get(pk=pk)
     context = {
@@ -202,9 +243,11 @@ def select_seat(request, pk):
     return render(request, 'main/booking2.html', context)
 
 
+@login_required(login_url='login')
 def seat_seal(request, pk):
     session = Session.objects.get(pk=pk)
-    sold_seats = Booking.objects.filter(session__pk=pk).values_list('seat', flat=True)
+    sold_seats = Booking.objects.filter(
+        session__pk=pk).values_list('seat', flat=True)
     s = list(sold_seats)
     ssss = Seat.objects.filter(id__in=s)
 
@@ -216,27 +259,36 @@ def seat_seal(request, pk):
     return render(request, 'main/seat_sel.html', context)
 
 
-def topay(request):
+@login_required(login_url='login')
+def to_pay(request):
     if request.method == 'POST':
         ids = []
         seats_selected = request.POST['seats'].split(',')
         seats = Seat.objects.all()
         for i in seats_selected:
-            ids.append(seats.get(row=int(i[:i.find('_')]), number=int(i[i.find('_') + 1:])))
+            ids.append(
+                seats.get(row=int(i[:i.find('_')]), number=int(i[i.find('_') + 1:])))
         user = User.objects.get(id=request.user.id)
         session = Session.objects.get(id=int(request.POST['session_id']))
-        b = Booking.objects.create(user=user, session=session, is_paied=True, booked_datetime=datetime.datetime.now())
+        b = Booking.objects.create(
+            user=user, session=session, is_paied=True, booked_datetime=datetime.datetime.now())
         b.seat.set(ids)
+        embed_QR(str(b.pk))
+        b.qr_code = f'{b.pk}.png'
         b.save()
         return JsonResponse(data={'ans': 'success'})
 
 
-def ticket(request, session_pk):
-    booking = Booking.objects.get(session__pk=session_pk)
-    booking.save()
-    print(booking)
-    context ={
-        'title': 'Ticket',
-        'booking': booking
+@login_required(login_url='login')
+def qr_check(request, session_pk, user_pk):
+    all = Booking.objects.all()
+    result = ''
+    if all.filter(session__pk=session_pk, user__pk=user_pk):
+        result = True
+    else:
+        result = False
+    context = {
+        'title': 'Qr Check',
+        'result': result
     }
-    return render(request, 'main/ticket.html', context)
+    return render(request, 'main/check.html', context)

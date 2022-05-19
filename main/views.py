@@ -277,18 +277,3 @@ def to_pay(request):
         b.qr_code = f'{b.pk}.png'
         b.save()
         return JsonResponse(data={'ans': 'success'})
-
-
-@login_required(login_url='login')
-def qr_check(request, session_pk, user_pk):
-    all = Booking.objects.all()
-    result = ''
-    if all.filter(session__pk=session_pk, user__pk=user_pk):
-        result = True
-    else:
-        result = False
-    context = {
-        'title': 'Qr Check',
-        'result': result
-    }
-    return render(request, 'main/check.html', context)

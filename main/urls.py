@@ -15,5 +15,4 @@ urlpatterns = [
     path('select_seat/<int:pk>', select_seat, name='select_seat'),
     path('seat_seal/<int:pk>', seat_seal, name='seat_seal'),
     path('select_seat/topay', to_pay, name='topay'),
-    path('qr/checking/<int:session_pk>/<int:user_pk>', qr_check, name='check'),
 ]

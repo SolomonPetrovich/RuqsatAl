@@ -222,7 +222,7 @@ def profile(request):
 @login_required(login_url='login')
 def booking(request, pk):
     sessions = Session.objects.filter(movie_id=pk).values()
-    dates = sessions.values_list('date', flat=True).distinct('date')
+    dates = sessions.values_list('date', flat=True)
 
     context = {
         'title': 'Booking',

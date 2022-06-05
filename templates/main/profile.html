@@ -1,4 +1,4 @@
-{% extends 'main/layout.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
@@ -44,10 +44,6 @@
                     <label for="email">
                         <h5>Email:</h5>
                         <input class="form-info" name="email" id="email" value="{{ request.user.email }}" type="email">
-                    </label>
-                    <label for="phone">
-                        <h5>Phone:</h5>
-                        <input class="form-info" name="phone" id="phone" value="{{ request.user.phone }}" type="tel">
                     </label>
                     {% if message %}
                         {{ message }}

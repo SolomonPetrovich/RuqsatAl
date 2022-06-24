@@ -188,7 +188,7 @@ def profile(request):
 @login_required
 def booking(request, pk):
     sessions = Session.objects.filter(movie_id=pk).values()
-    dates = sessions.values_list('date', flat=True)
+    dates = sessions.values_list('date', flat=True).distinct('date')
 
     context = {
         'title': 'Booking',

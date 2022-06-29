@@ -1,10 +1,10 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/profile.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style-starter.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style-starter.css' %}">
 {% endblock style %}
 {% block content %}
 <div class="container">
@@ -15,40 +15,42 @@
         <input type="radio" name="slider" id="help">
         <div class="list">
             <label for="home" class="home">
-            <i class="fa fa-cog"></i>
-            <span class="title">Settings</span>
-        </label>
-        <label for="blog" class="blog">
-            <span class="icon"><i class="fa fa-heart"></i></span>
-            <span class="title">Favorites</span>
-        </label>
-        <label for="help" class="help">
-            <span class="icon"><i class="fa fa-ticket"></i></span>
-            <span class="title">My tickets</span>
-        </label>
-        <div class="slider"></div>
-    </div>
+                <i class="fa fa-cog"></i>
+                <span class="title">Settings</span>
+            </label>
+            <label for="blog" class="blog">
+                <span class="icon"><i class="fa fa-heart"></i></span>
+                <span class="title">Favorites</span>
+            </label>
+            <label for="help" class="help">
+                <span class="icon"><i class="fa fa-ticket"></i></span>
+                <span class="title">My tickets</span>
+            </label>
+            <div class="slider"></div>
+        </div>
         <div class="text-content">
             <div class="home text">
                 <div class="title">User information: </div>
                 <form method="POST">
-                {% csrf_token %}
+                    {% csrf_token %}
                     <label class="info" for="first_name">
                         <h5>First Name:</h5>
-                        <input class="form-info" name="first_name" id="first_name" value="{{ request.user.first_name }}" type="text">
+                        <input class="form-info" name="first_name" id="first_name" value="{{ request.user.first_name }}"
+                            type="text">
                     </label>
                     <label for="last_name">
                         <h5>Last Name:</h5>
-                        <input class="form-info" name="last_name" id="last_name" value="{{ request.user.last_name }}" type="text">
+                        <input class="form-info" name="last_name" id="last_name" value="{{ request.user.last_name }}"
+                            type="text">
                     </label>
                     <label for="email">
                         <h5>Email:</h5>
                         <input class="form-info" name="email" id="email" value="{{ request.user.email }}" type="email">
                     </label>
                     {% if message %}
-                        {{ message }}
+                    {{ message }}
                     {% endif %}
-                    <input class="button" id="save" type="submit" value="Save Changes" >
+                    <input class="button" id="save" type="submit" value="Save Changes">
                 </form>
             </div>
             <div class="blog text">
@@ -57,9 +59,9 @@
                 </div>
                 <div class="ctt">
                     {% for fav in favs %}
-                        <a href="{% url 'movie_detail' pk=fav.movie.pk  %}">
-                            <div class="movie" style="background-image: url('{{ fav.movie.poster_path }}');"></div>
-                        </a>
+                    <a href="{% url 'movie_detail' pk=fav.movie.pk  %}">
+                        <div class="movie" style="background-image: url('{{ fav.movie.poster_path }}');"></div>
+                    </a>
                     {% endfor %}
                 </div>
             </div>
@@ -69,27 +71,27 @@
                 </div>
                 <div class="ctt">
                     {% for ticket in tickets %}
-                        <span>Movie: </span>
-                        <span class="ticket">{{ ticket.session.movie }}</span><br>
-                        <span>Date: </span>
-                        <span class="ticket">{{ ticket.session.date }}</span><br>
-                        <span>Time: </span>
-                        <span class="ticket">{{ ticket.session.time }}</span><br>
-                        <span>Screen: </span>
-                        <span class="ticket">{{ ticket.session.hall }}</span><br>
-                        <span>Seats: </span><br>
-                        {% for seat in ticket.seat.all %}
-                            <span>Row: </span>
-                            <span class="ticket">{{ seat.row }}</span>
-                            <span>Seat: </span>
-                            <span class="ticket">{{ seat.number }}</span><br>
-                        {% endfor %}
-                        <span>QR: </span>
-                        <img class="ticket" src="{{ ticket.qr_code.url }}" alt=""><br>
-                        <a href="{{ ticket.qr_code.url }}" download>
-                            <button class="button"><i class="fa fa-download"></i> Download</button>
-                        </a>
-                        <hr>
+                    <span>Movie: </span>
+                    <span class="ticket">{{ ticket.session.movie }}</span><br>
+                    <span>Date: </span>
+                    <span class="ticket">{{ ticket.session.date }}</span><br>
+                    <span>Time: </span>
+                    <span class="ticket">{{ ticket.session.time }}</span><br>
+                    <span>Screen: </span>
+                    <span class="ticket">{{ ticket.session.hall }}</span><br>
+                    <span>Seats: </span><br>
+                    {% for seat in ticket.seat.all %}
+                    <span>Row: </span>
+                    <span class="ticket">{{ seat.row }}</span>
+                    <span>Seat: </span>
+                    <span class="ticket">{{ seat.number }}</span><br>
+                    {% endfor %}
+                    <span>QR: </span>
+                    <img class="ticket" src="{{ ticket.qr_code.url }}" alt=""><br>
+                    <a href="{{ ticket.qr_code.url }}" download>
+                        <button class="button"><i class="fa fa-download"></i> Download</button>
+                    </a>
+                    <hr>
                     {% endfor %}
                 </div>
             </div>
@@ -98,24 +100,24 @@
 </div>
 {% endblock content %}
 {% block scripts %}
-    <script>
-        let f_name = document.querySelector("#first_name");
-        let l_name = document.querySelector("#last_name");
-        let email = document.querySelector("#email");
-        let phone = document.querySelector("#phone");
+<script>
+    let f_name = document.querySelector("#first_name");
+    let l_name = document.querySelector("#last_name");
+    let email = document.querySelector("#email");
+    let phone = document.querySelector("#phone");
 
-        let button = document.querySelector(".button");
-        button.disabled = true; //setting button state to disabled
-        f_name.addEventListener("change", stateHandle);
-        l_name.addEventListener("change", stateHandle);
-        email.addEventListener("change", stateHandle);
-        phone.addEventListener("change", stateHandle);
-        function stateHandle() {
-            if (document.querySelector(".form-info").value === "") {
-                button.disabled = true; //button remains disabled
-            } else {
-                button.disabled = false; //button is enabled
-            }
+    let button = document.querySelector(".button");
+    button.disabled = true; //setting button state to disabled
+    f_name.addEventListener("change", stateHandle);
+    l_name.addEventListener("change", stateHandle);
+    email.addEventListener("change", stateHandle);
+    phone.addEventListener("change", stateHandle);
+    function stateHandle() {
+        if (document.querySelector(".form-info").value === "") {
+            button.disabled = true; //button remains disabled
+        } else {
+            button.disabled = false; //button is enabled
         }
-    </script>
+    }
+</script>
 {% endblock %}

@@ -1,188 +1,189 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-    <!--grids-sec1-->
-    <section class="w3l-grids">
-        <div class="grids-main py-5">
-            <div class="container py-lg-4">
-                <div class="headerhny-title">
-                    <div class="w3l-title-grids">
-                        <div class="headerhny-left">
-                            <h3 class="hny-title">All</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="w3l-populohny-grids">
-                    {% for movie in movie_list %}
-                        <div class="item vhny-grid">
-                            <div class="box16 mb-0">
-                                <a href="{% url 'movie_detail' pk=movie.pk %}">
-                                    <figure>
-                                        <img class="img-fluid" src="{{ movie.poster_path }}" alt="">
-                                    </figure>
-                                    <div class="box-content">
-                                        <h3 class="title">{{ movie.title }}</h3>
-                                        <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date }}</span>
-                                            <a href="{% url 'addtofavs' movie.id %}" class="text-right">
-                                                {% if movie.title in favs %}
-                                                    <span class="post fa fa-heart text-right"></span>
-                                                {% else %}
-                                                    <span class="post fa fa-heart-o text-right"></span>
-                                                {% endif %}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <nav>
-                    <ul class="pagination pagination-lg justify-content-center">
-                        {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% for p in paginator.page_range %}
-                            {% if page_obj.number == p %}
-                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </section>
-
-    <section class="w3l-albums py-5" id="projects">
+<!--grids-sec1-->
+<section class="w3l-grids">
+    <div class="grids-main py-5">
         <div class="container py-lg-4">
-            <div class="row">
-                <div class="col-lg-12 mx-auto">
-                    <!--Horizontal Tab-->
-                    <div id="parentHorizontalTab">
-                        <ul class="resp-tabs-list hor_1">
-                            <li>Recent Movies</li>
-                            <li>Popular Movies</li>
-                            <li>Trend Movies</li>
-                            <div class="clear"></div>
-                        </ul>
-                        <div class="resp-tabs-container hor_1">
-                            <div class="albums-content">
-                                <div class="row">
-                                    <!--/set1-->
-                                    {% for item in recent %}
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}">
-
-                                                    <img src="{{ item.poster_path }}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="message">
-                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
-                                                        {% if item.title in favs %}
-                                                            <span class="post fa fa-heart text-right"></span>
-                                                        {% else %}
-                                                            <span class="post fa fa-heart-o text-right"></span>
-                                                        {% endif %}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
+            <div class="headerhny-title">
+                <div class="w3l-title-grids">
+                    <div class="headerhny-left">
+                        <h3 class="hny-title">All</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="w3l-populohny-grids">
+                {% for movie in movie_list %}
+                <div class="item vhny-grid">
+                    <div class="box16 mb-0">
+                        <a href="{% url 'movie_detail' pk=movie.pk %}">
+                            <figure>
+                                <img class="img-fluid" src="{{ movie.poster_path }}" alt="">
+                            </figure>
+                            <div class="box-content">
+                                <h3 class="title">{{ movie.title }}</h3>
+                                <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ movie.release_date
+                                        }}</span>
+                                    <a href="{% url 'addtofavs' movie.id %}" class="text-right">
+                                        {% if movie.title in favs %}
+                                        <span class="post fa fa-heart text-right"></span>
+                                        {% else %}
+                                        <span class="post fa fa-heart-o text-right"></span>
+                                        {% endif %}
+                                    </a>
+                                </h4>
                             </div>
-                            <div class="albums-content">
-                                <div class="row">
-                                    <!--/set1-->
-                                    {% for item in popular %}
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}">
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <nav>
+                <ul class="pagination pagination-lg justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                    <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
 
-                                                    <img src="{{ item.poster_path }}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
+<section class="w3l-albums py-5" id="projects">
+    <div class="container py-lg-4">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <!--Horizontal Tab-->
+                <div id="parentHorizontalTab">
+                    <ul class="resp-tabs-list hor_1">
+                        <li>Recent Movies</li>
+                        <li>Popular Movies</li>
+                        <li>Trend Movies</li>
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="resp-tabs-container hor_1">
+                        <div class="albums-content">
+                            <div class="row">
+                                <!--/set1-->
+                                {% for item in recent %}
+                                <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
+                                    <div class="slider-info">
+                                        <div class="img-circle">
+                                            <a href="{%  url 'movies' %}">
 
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
+                                                <img src="{{ item.poster_path }}" class="img-fluid" alt="author image">
+                                                <div class="overlay-icon">
+
+                                                    <span class="fa fa-play video-icon" aria-hidden="true"></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="message">
+                                            <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                            <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{
+                                                    item.release_date }}</span>
+                                                <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                    {% if item.title in favs %}
+                                                    <span class="post fa fa-heart text-right"></span>
+                                                    {% else %}
+                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    {% endif %}
                                                 </a>
-                                            </div>
-                                            <div class="message">
-                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
-                                                        {% if item.title in favs %}
-                                                            <span class="post fa fa-heart text-right"></span>
-                                                        {% else %}
-                                                            <span class="post fa fa-heart-o text-right"></span>
-                                                        {% endif %}
-                                                    </a>
-                                                </h4>
-                                            </div>
+                                            </h4>
                                         </div>
                                     </div>
-                                    {% endfor %}
                                 </div>
+                                {% endfor %}
                             </div>
-                            <div class="albums-content">
-                                <div class="row">
-                                    <!--/set3-->
-                                    {% for item in trend %}
-                                    <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
-                                        <div class="slider-info">
-                                            <div class="img-circle">
-                                                <a href="{%  url 'movies' %}">
-                                                    <img src="{{ item.poster_path }}" class="img-fluid"
-                                                        alt="author image">
-                                                    <div class="overlay-icon">
-                                                        <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                                                    </div>
+                        </div>
+                        <div class="albums-content">
+                            <div class="row">
+                                <!--/set1-->
+                                {% for item in popular %}
+                                <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
+                                    <div class="slider-info">
+                                        <div class="img-circle">
+                                            <a href="{%  url 'movies' %}">
+
+                                                <img src="{{ item.poster_path }}" class="img-fluid" alt="author image">
+                                                <div class="overlay-icon">
+
+                                                    <span class="fa fa-play video-icon" aria-hidden="true"></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="message">
+                                            <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                            <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{
+                                                    item.release_date }}</span>
+                                                <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                    {% if item.title in favs %}
+                                                    <span class="post fa fa-heart text-right"></span>
+                                                    {% else %}
+                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    {% endif %}
                                                 </a>
-                                            </div>
-                                            <div class="message">
-                                                <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
-                                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{ item.release_date }}</span>
-                                                    <a href="{% url 'addtofavs' item.id %}" class="text-right">
-                                                        {% if item.title in favs %}
-                                                            <span class="post fa fa-heart text-right"></span>
-                                                        {% else %}
-                                                            <span class="post fa fa-heart-o text-right"></span>
-                                                        {% endif %}
-                                                    </a>
-                                                </h4>
-                                            </div>
+                                            </h4>
                                         </div>
                                     </div>
-                                    {% endfor %}
                                 </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="albums-content">
+                            <div class="row">
+                                <!--/set3-->
+                                {% for item in trend %}
+                                <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
+                                    <div class="slider-info">
+                                        <div class="img-circle">
+                                            <a href="{%  url 'movies' %}">
+                                                <img src="{{ item.poster_path }}" class="img-fluid" alt="author image">
+                                                <div class="overlay-icon">
+                                                    <span class="fa fa-play video-icon" aria-hidden="true"></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="message">
+                                            <a class="author-book-title" href="{%  url 'movies' %}">{{ item.title }}</a>
+                                            <h4> <span class="post"><span class="fa fa-clock-o"> </span> {{
+                                                    item.release_date }}</span>
+                                                <a href="{% url 'addtofavs' item.id %}" class="text-right">
+                                                    {% if item.title in favs %}
+                                                    <span class="post fa fa-heart text-right"></span>
+                                                    {% else %}
+                                                    <span class="post fa fa-heart-o text-right"></span>
+                                                    {% endif %}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

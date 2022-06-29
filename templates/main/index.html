@@ -1,312 +1,333 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- main-slider -->
-    <section class="w3l-main-slider position-relative" id="home">
-		<div class="companies20-content">
-			<div class="owl-one owl-carousel owl-theme">
-				<div class="item" >
-					<li>
-						<div class="slider-info banner-view bg bg2" style="background-image: url(https://images3.alphacoders.com/121/thumb-1920-1214446.jpg)">
-							<div class="banner-info">
-								<h3>Sonic the Hedgehog 2</h3>
-								<p>
-                                    When the manic Dr Robotnik returns to Earth with a new ally, Knuckles the Echidna, Sonic and his new friend Tails is all that stands in their way.
-                                </p>
-								<a href="#small-dialog1" class="popup-with-zoom-anim play-view1">
-									<span class="video-play-icon">
-										<span class="fa fa-play"></span>
-									</span>
-									<h6>Watch Trailer</h6>
-								</a>
-								<div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
-									<iframe src="https://player.vimeo.com/video/663657856" allow="autoplay; fullscreen"
-										allowfullscreen=""></iframe>
-								</div>
-							</div>
-						</div>
-					</li>
-				</div>
-				<div class="item">
-					<li>
-						<div class="slider-info  banner-view banner-top1 bg bg2" style="background-image: url(https://b-static.besthdwallpaper.com/betmen-robert-pattinson-v-kostyume-betmena-poster-oboi-2400x1350-89590_50.jpg)">
-							<div class="banner-info">
-								<h3>The Batman</h3>
-								<p>When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.</p>
-								<a href="#small-dialog2" class="popup-with-zoom-anim play-view1">
-									<span class="video-play-icon">
-										<span class="fa fa-play"></span>
-									</span>
-									<h6>Watch Trailer</h6>
-								</a>
-								<div id="small-dialog2" class="zoom-anim-dialog mfp-hide">
-									<iframe src="https://player.vimeo.com/video/660408476" allow="autoplay; fullscreen"
-										allowfullscreen=""></iframe>
-								</div>
-							</div>
-						</div>
-					</li>
-				</div>
-				<div class="item">
-					<li>
-						<div class="slider-info banner-view banner-top2 bg bg2" style="background-image: url(https://images3.alphacoders.com/121/1219357.jpg)">
-							<div class="banner-info">
-								<h3>Turning Red</h3>
-								<p>A 13-year-old girl named Meilin turns into a giant red panda whenever she gets too excited.</p>
-								<a href="#small-dialog3" class="popup-with-zoom-anim play-view1">
-									<span class="video-play-icon">
-										<span class="fa fa-play"></span>
-									</span>
-									<h6>Watch Trailer</h6>
-								</a>
-								<div id="small-dialog3" class="zoom-anim-dialog mfp-hide">
-									<iframe src="https://player.vimeo.com/video/574767125" allow="autoplay; fullscreen"
-										allowfullscreen=""></iframe>
-								</div>
-							</div>
-						</div>
-					</li>
-				</div>
-				<div class="item">
-					<li>
-						<div class="slider-info banner-view banner-top3 bg bg2" style="background-image: url(https://wallpapercave.com/wp/wp10569306.jpg)">
-							<div class="banner-info">
-								<h3>Moonfall</h3>
-								<p>A mysterious force knocks the moon from its orbit around Earth and sends it hurtling on a collision course with life as we know it.</p>
-								<a href="#small-dialog4" class="popup-with-zoom-anim play-view1">
-									<span class="video-play-icon">
-										<span class="fa fa-play"></span>
-									</span>
-									<h6>Watch Trailer</h6>
-								</a>
-								<div id="small-dialog4" class="zoom-anim-dialog mfp-hide">
-									<iframe src="https://player.vimeo.com/video/663084099" allow="autoplay; fullscreen"
-										allowfullscreen=""></iframe>
-								</div>
-							</div>
-						</div>
-					</li>
-				</div>
-			</div>
-		</div>
-	</section>
-    <!-- main-slider -->
-    <!--grids-sec1-->
-    <section class="w3l-grids">
-        <div class="grids-main py-5">
-            <div class="container py-lg-3">
-                <div class="headerhny-title">
-                    <div class="w3l-title-grids">
-                        <div class="headerhny-left">
-                            <h3 class="hny-title">Popular Movies</h3>
-                        </div>
-                        <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="{% url 'movies' %}">Show all</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="w3l-populohny-grids">
-                    {% for item in popular_movies %}
-                    <div class="item vhny-grid">
-                        <div class="box16">
-                            <a href="{% url 'movie_detail' pk=item.pk %}">
-                                <figure>
-                                    <img class="img-fluid" src="{{ item.poster_path }}" alt="">
-                                </figure>
-                                <div class="box-content">
-                                    <h3 class="title">{{ item.title }}</h3>
-                                    <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }} </span>
-                                        <span class="post fa fa-fa-heart-o text-right"></span>
-                                    </h4>
-                                </div>
-                                <span class="" aria-hidden="true"></span>
+<!-- main-slider -->
+<section class="w3l-main-slider position-relative" id="home">
+    <div class="companies20-content">
+        <div class="owl-one owl-carousel owl-theme">
+            <div class="item">
+                <li>
+                    <div class="slider-info banner-view bg bg2"
+                        style="background-image: url(https://images3.alphacoders.com/121/thumb-1920-1214446.jpg)">
+                        <div class="banner-info">
+                            <h3>Sonic the Hedgehog 2</h3>
+                            <p>
+                                When the manic Dr Robotnik returns to Earth with a new ally, Knuckles the Echidna, Sonic
+                                and his new friend Tails is all that stands in their way.
+                            </p>
+                            <a href="#small-dialog1" class="popup-with-zoom-anim play-view1">
+                                <span class="video-play-icon">
+                                    <span class="fa fa-play"></span>
+                                </span>
+                                <h6>Watch Trailer</h6>
                             </a>
+                            <div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
+                                <iframe src="https://player.vimeo.com/video/663657856" allow="autoplay; fullscreen"
+                                    allowfullscreen=""></iframe>
+                            </div>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
+                </li>
             </div>
-        </div>
-    </section>
-    <!--//grids-sec1-->
-    <!--grids-sec2-->
-    <section class="w3l-grids">
-        <div class="grids-main py-5">
-            <div class="container py-lg-3">
-                <div class="headerhny-title">
-                    <div class="w3l-title-grids">
-                        <div class="headerhny-left">
-                            <h3 class="hny-title">New Releases</h3>
-                        </div>
-                        <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="{% url 'movies' %}">Show all</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-three owl-carousel owl-theme">
-                    {% for item in new_movies %}
-                    <div class="item vhny-grid">
-                        <div class="box16 mb-0">
-                            <a href="{% url 'movies' %}">
-                                <figure>
-                                    <img class="img-fluid" src="{{ item.poster_path }}" alt="">
-                                </figure>
-                                <div class="box-content">
-                                    <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }} </span>
-                                    </h4>
-                                </div>
-                                <span class="" aria-hidden="true"></span>
+            <div class="item">
+                <li>
+                    <div class="slider-info  banner-view banner-top1 bg bg2"
+                        style="background-image: url(https://b-static.besthdwallpaper.com/betmen-robert-pattinson-v-kostyume-betmena-poster-oboi-2400x1350-89590_50.jpg)">
+                        <div class="banner-info">
+                            <h3>The Batman</h3>
+                            <p>When the Riddler, a sadistic serial killer, begins murdering key political figures in
+                                Gotham, Batman is forced to investigate the city's hidden corruption and question his
+                                family's involvement.</p>
+                            <a href="#small-dialog2" class="popup-with-zoom-anim play-view1">
+                                <span class="video-play-icon">
+                                    <span class="fa fa-play"></span>
+                                </span>
+                                <h6>Watch Trailer</h6>
                             </a>
+                            <div id="small-dialog2" class="zoom-anim-dialog mfp-hide">
+                                <iframe src="https://player.vimeo.com/video/660408476" allow="autoplay; fullscreen"
+                                    allowfullscreen=""></iframe>
+                            </div>
                         </div>
-                        <h3> <a class="title-gd" href="{% url 'movie_detail' pk=item.pk %}">{{ item.title }}</a></h3>
-                        <div class="button-center text-center mt-4">
-                            <a href="{% url 'movie_detail' pk=item.pk %}" class="btn watch-button">Book now</a>
-                        </div>
-
                     </div>
-                    {% endfor %}
+                </li>
+            </div>
+            <div class="item">
+                <li>
+                    <div class="slider-info banner-view banner-top2 bg bg2"
+                        style="background-image: url(https://images3.alphacoders.com/121/1219357.jpg)">
+                        <div class="banner-info">
+                            <h3>Turning Red</h3>
+                            <p>A 13-year-old girl named Meilin turns into a giant red panda whenever she gets too
+                                excited.</p>
+                            <a href="#small-dialog3" class="popup-with-zoom-anim play-view1">
+                                <span class="video-play-icon">
+                                    <span class="fa fa-play"></span>
+                                </span>
+                                <h6>Watch Trailer</h6>
+                            </a>
+                            <div id="small-dialog3" class="zoom-anim-dialog mfp-hide">
+                                <iframe src="https://player.vimeo.com/video/574767125" allow="autoplay; fullscreen"
+                                    allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="item">
+                <li>
+                    <div class="slider-info banner-view banner-top3 bg bg2"
+                        style="background-image: url(https://wallpapercave.com/wp/wp10569306.jpg)">
+                        <div class="banner-info">
+                            <h3>Moonfall</h3>
+                            <p>A mysterious force knocks the moon from its orbit around Earth and sends it hurtling on a
+                                collision course with life as we know it.</p>
+                            <a href="#small-dialog4" class="popup-with-zoom-anim play-view1">
+                                <span class="video-play-icon">
+                                    <span class="fa fa-play"></span>
+                                </span>
+                                <h6>Watch Trailer</h6>
+                            </a>
+                            <div id="small-dialog4" class="zoom-anim-dialog mfp-hide">
+                                <iframe src="https://player.vimeo.com/video/663084099" allow="autoplay; fullscreen"
+                                    allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- main-slider -->
+<!--grids-sec1-->
+<section class="w3l-grids">
+    <div class="grids-main py-5">
+        <div class="container py-lg-3">
+            <div class="headerhny-title">
+                <div class="w3l-title-grids">
+                    <div class="headerhny-left">
+                        <h3 class="hny-title">Popular Movies</h3>
+                    </div>
+                    <div class="headerhny-right text-lg-right">
+                        <h4><a class="show-title" href="{% url 'movies' %}">Show all</a></h4>
+                    </div>
                 </div>
             </div>
+            <div class="w3l-populohny-grids">
+                {% for item in popular_movies %}
+                <div class="item vhny-grid">
+                    <div class="box16">
+                        <a href="{% url 'movie_detail' pk=item.pk %}">
+                            <figure>
+                                <img class="img-fluid" src="{{ item.poster_path }}" alt="">
+                            </figure>
+                            <div class="box-content">
+                                <h3 class="title">{{ item.title }}</h3>
+                                <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }}
+                                    </span>
+                                    <span class="post fa fa-fa-heart-o text-right"></span>
+                                </h4>
+                            </div>
+                            <span class="" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--//grids-sec1-->
+<!--grids-sec2-->
+<section class="w3l-grids">
+    <div class="grids-main py-5">
+        <div class="container py-lg-3">
+            <div class="headerhny-title">
+                <div class="w3l-title-grids">
+                    <div class="headerhny-left">
+                        <h3 class="hny-title">New Releases</h3>
+                    </div>
+                    <div class="headerhny-right text-lg-right">
+                        <h4><a class="show-title" href="{% url 'movies' %}">Show all</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-three owl-carousel owl-theme">
+                {% for item in new_movies %}
+                <div class="item vhny-grid">
+                    <div class="box16 mb-0">
+                        <a href="{% url 'movies' %}">
+                            <figure>
+                                <img class="img-fluid" src="{{ item.poster_path }}" alt="">
+                            </figure>
+                            <div class="box-content">
+                                <h4> <span class="post"><span class="fa fa-calendar"> </span> {{ item.release_date }}
+                                    </span>
+                                </h4>
+                            </div>
+                            <span class="" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <h3> <a class="title-gd" href="{% url 'movie_detail' pk=item.pk %}">{{ item.title }}</a></h3>
+                    <div class="button-center text-center mt-4">
+                        <a href="{% url 'movie_detail' pk=item.pk %}" class="btn watch-button">Book now</a>
+                    </div>
 
-        </div>
-    </section>
-    <!--grids-sec2-->
-    <!--mid-slider -->
-    <section class="w3l-mid-slider position-relative">
-        <div class="companies20-content">
-            <div class="owl-mid owl-carousel owl-theme">
-                <div class="item">
-                    <li>
-                        <div class="slider-info mid-view bg bg2" style="background-image: url(https://images4.alphacoders.com/120/1205664.jpg)">
-                            <div class="container">
-                                <div class="mid-info">
-                                    <span class="sub-text">Adventure</span>
-                                    <h3>Uncharted</h3>
-                                    <a class="watch" href="https://player.vimeo.com/video/642301892"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                 </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info mid-view mid-top1 bg bg2" style="background-image: url(https://www.gamespot.com/a/uploads/original/1600/16003485/3917523-screenshot2021-12-13at10.43.36am.png)">
-                            <div class="container">
-                                <div class="mid-info">
-                                    <span class="sub-text">Fantasy</span>
-                                    <h3>Fantastic Beasts: The Secrets of Dumbledore</h3>
-                                    <a class="watch" href="https://player.vimeo.com/video/656211853"><span class="fa fa-play"
-                                            aria-hidden="true"></span>
-                                        Watch Trailer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info mid-view mid-top2 bg bg2" style="background-image: url(https://www.moviechant.com/media/images/2022/03/04/all-the-old-knives-movie-screenshots_Z1VTCBX.jpg)">
-                            <div class="container">
-                                <div class="mid-info">
-                                    <span class="sub-text">Action</span>
-                                    <h3>All the Old Knives</h3>
-                                    <a class="watch" href="https://player.vimeo.com/video/695088356 "><span class="fa fa-play" aria-hidden="true"></span> Watch Trailer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
+                {% endfor %}
             </div>
         </div>
-    </section>
+
+    </div>
+</section>
+<!--grids-sec2-->
+<!--mid-slider -->
+<section class="w3l-mid-slider position-relative">
+    <div class="companies20-content">
+        <div class="owl-mid owl-carousel owl-theme">
+            <div class="item">
+                <li>
+                    <div class="slider-info mid-view bg bg2"
+                        style="background-image: url(https://images4.alphacoders.com/120/1205664.jpg)">
+                        <div class="container">
+                            <div class="mid-info">
+                                <span class="sub-text">Adventure</span>
+                                <h3>Uncharted</h3>
+                                <a class="watch" href="https://player.vimeo.com/video/642301892"><span
+                                        class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="item">
+                <li>
+                    <div class="slider-info mid-view mid-top1 bg bg2"
+                        style="background-image: url(https://www.gamespot.com/a/uploads/original/1600/16003485/3917523-screenshot2021-12-13at10.43.36am.png)">
+                        <div class="container">
+                            <div class="mid-info">
+                                <span class="sub-text">Fantasy</span>
+                                <h3>Fantastic Beasts: The Secrets of Dumbledore</h3>
+                                <a class="watch" href="https://player.vimeo.com/video/656211853"><span
+                                        class="fa fa-play" aria-hidden="true"></span>
+                                    Watch Trailer</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="item">
+                <li>
+                    <div class="slider-info mid-view mid-top2 bg bg2"
+                        style="background-image: url(https://www.moviechant.com/media/images/2022/03/04/all-the-old-knives-movie-screenshots_Z1VTCBX.jpg)">
+                        <div class="container">
+                            <div class="mid-info">
+                                <span class="sub-text">Action</span>
+                                <h3>All the Old Knives</h3>
+                                <a class="watch" href="https://player.vimeo.com/video/695088356 "><span
+                                        class="fa fa-play" aria-hidden="true"></span> Watch Trailer</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 {% block foooter %}
-    <footer class="w3l-footer">
-        <section class="footer-inner-main">
-            <div class="footer-hny-grids py-5">
-                <div class="container py-lg-4">
-                    <div class="text-txt">
-                        <div class="right-side">
+<footer class="w3l-footer">
+    <section class="footer-inner-main">
+        <div class="footer-hny-grids py-5">
+            <div class="container py-lg-4">
+                <div class="text-txt">
+                    <div class="right-side">
 
-                            <div class="row footer-links">
-                                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                                    <h6>Movies</h6>
-                                    <ul>
-                                        <li><a href="#">Movies</a></li>
-                                        <li><a href="#">Videos</a></li>
-                                        <li><a href="#">English Movies</a></li>
-                                        <li><a href="#">Tailor</a></li>
-                                        <li><a href="#">Upcoming Movies</a></li>
-                                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                                    <h6>Information</h6>
-                                    <ul>
-                                        <li><a href="{% url 'home' %}">Home</a> </li>
-                                        <li><a href="{% url 'about' %}">About</a> </li>
-                                        <li><a href="{%  url 'movies_genre' pk=10770 %}">Tv Movies</a> </li>
-                                        <li><a href="#">Blogs</a> </li>
-                                        <li><a href="">Login</a></li>
-                                        <li><a href="{% url 'contact' %}">Contact</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 col-sm-3 sub-two-right mt-5">
-                                    <div class="mapouter"><div class="gmap_canvas"><iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=Expo%203CQ8+F9P,%20Nur-Sultan%20020000&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>
+                        <div class="row footer-links">
+                            <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                                <h6>Movies</h6>
+                                <ul>
+                                    <li><a href="#">Movies</a></li>
+                                    <li><a href="#">Videos</a></li>
+                                    <li><a href="#">English Movies</a></li>
+                                    <li><a href="#">Tailor</a></li>
+                                    <li><a href="#">Upcoming Movies</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                                <h6>Information</h6>
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Home</a> </li>
+                                    <li><a href="{% url 'about' %}">About</a> </li>
+                                    <li><a href="{%  url 'movies_genre' pk=10770 %}">Tv Movies</a> </li>
+                                    <li><a href="#">Blogs</a> </li>
+                                    <li><a href="">Login</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-3 sub-two-right mt-5">
+                                <div class="mapouter">
+                                    <div class="gmap_canvas"><iframe width="400" height="300" id="gmap_canvas"
+                                            src="https://maps.google.com/maps?q=Expo%203CQ8+F9P,%20Nur-Sultan%20020000&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="below-section">
-                <div class="container">
-                    <div class="copyright-footer">
-                        <div class="columns text-lg-left">
-                            <p>&copy; 2022 RuqsatAl. All rights reserved</p>
-                        </div>
-
-                        <ul class="social text-lg-right">
-                            <li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                            </li>
-                            <li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
-                            </li>
-                            <li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </li>
-                            <li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                            </li>
-
-                        </ul>
+        </div>
+        </div>
+        <div class="below-section">
+            <div class="container">
+                <div class="copyright-footer">
+                    <div class="columns text-lg-left">
+                        <p>&copy; 2022 RuqsatAl. All rights reserved</p>
                     </div>
+
+                    <ul class="social text-lg-right">
+                        <li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                        </li>
+                        <li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+                        </li>
+                        <li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                        </li>
+                        <li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
-            <!-- move top -->
-            <button onclick="topFunction()" id="movetop" title="Go to top">
-                <span class="fa fa-arrow-up" aria-hidden="true"></span>
-            </button>
-            <script>
-                // When the user scrolls down 20px from the top of the document, show the button
-                window.onscroll = function () {
-                    scrollFunction()
-                };
+        </div>
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top">
+            <span class="fa fa-arrow-up" aria-hidden="true"></span>
+        </button>
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+                scrollFunction()
+            };
 
-                function scrollFunction() {
-                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                        document.getElementById("movetop").style.display = "block";
-                    } else {
-                        document.getElementById("movetop").style.display = "none";
-                    }
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
                 }
+            }
 
-                // When the user clicks on the button, scroll to the top of the document
-                function topFunction() {
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                }
-            </script>
-            <!-- /move top -->
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+        <!-- /move top -->
 
-        </section>
-    </footer>
+    </section>
+</footer>
 {% endblock %}

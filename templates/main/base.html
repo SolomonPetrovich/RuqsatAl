@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,16 +51,16 @@
                             <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                         </li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account_logout' %}">Log out</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}">Log out</a>
+                        </li>
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account_login' %}"><i class="fa fa-user-circle-o"></i></a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}"><i class="fa fa-user-circle-o"></i></a>
+                        </li>
                         {% endif %}
                     </ul>
 
@@ -115,7 +116,7 @@
     {% endblock %}
     <!-- footer-66 -->
     {% block foooter %}
-    {%  endblock %}
+    {% endblock %}
 </body>
 
 </html>
@@ -324,7 +325,7 @@
 
     console.log("Live");
     $('#myModal').on('shown.bs.modal', function () {
-      $('#myInput').trigger('focus')
+        $('#myInput').trigger('focus')
     })
 </script>
 <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>

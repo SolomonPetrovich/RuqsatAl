@@ -86,7 +86,8 @@ def movie_detail(request, pk):
         user = User.objects.get(id=request.user.id)
         message = request.POST.get('comment')
 
-        comment = Comment.objects.create(user=user, movie=movie, message=message)
+        comment = Comment.objects.create(
+            user=user, movie=movie, message=message)
         if comment.save():
             return redirect('movie_detail', id)
 
@@ -176,7 +177,7 @@ def profile(request):
             messages.error(request, 'Updated Successfully!')
             return redirect('profile')
         else:
-            messages.error(request, 'PLease try again')
+            messages.error(request, 'Please try again')
 
     context = {'title': 'Profile',
                'favs': favs,
@@ -212,7 +213,8 @@ def select_seat(request, pk):
 @login_required
 def seat_seal(request, pk):
     session = Session.objects.get(pk=pk)
-    sold_seats = Booking.objects.filter(session__pk=pk).values_list('seat', flat=True)
+    sold_seats = Booking.objects.filter(
+        session__pk=pk).values_list('seat', flat=True)
     s = list(sold_seats)
     ssss = Seat.objects.filter(id__in=s)
 

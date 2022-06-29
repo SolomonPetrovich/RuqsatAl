@@ -1,71 +1,71 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-    {% block style %}
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/contact_us.css' %}">
-    {% endblock %}
-    <!-- Contact Us Form -->
-    <div class="container">
-        <h4>Contact Us</h4>
-        <h3>Leave a Message</h3>
-        <p>If you have a question regarding our services,
-            feel free to contact us using the form below.</p>
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/contact_us.css' %}">
+{% endblock %}
+<!-- Contact Us Form -->
+<div class="container">
+    <h4>Contact Us</h4>
+    <h3>Leave a Message</h3>
+    <p>If you have a question regarding our services,
+        feel free to contact us using the form below.</p>
 
-        <form name="contact-us-form" method="POST" action="">
-            {% csrf_token %}
-            <div class="row100" id="fname-row100">
-                <div class="col">
-                    <div class="inputBox" id="fname-inputBox">
-                        <label>
-                            <input type="text" name="fname" placeholder="First Name"/>
-                        </label>
-                        <span class="line" id="fname-line"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox" id="lname-inputBox">
-                        <label>
-                            <input type="text" name="lname" placeholder="Last Name"/>
-                        </label>
-                        <span class="line" id="lname-line"></span>
-                    </div>
+    <form name="contact-us-form" method="POST" action="">
+        {% csrf_token %}
+        <div class="row100" id="fname-row100">
+            <div class="col">
+                <div class="inputBox" id="fname-inputBox">
+                    <label>
+                        <input type="text" name="fname" placeholder="First Name" />
+                    </label>
+                    <span class="line" id="fname-line"></span>
                 </div>
             </div>
-            <div class="row100" id="email-row100">
-                <div class="col">
-                    <div class="inputBox" id="email-inputBox">
-                        <label>
-                            <input type="email" name="email" pattern="[^ @]*@[^ @]*" placeholder="Email" />
-                        </label>
-                        <span class="line" id="email-line"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="inputBox" id="tel-inputBox">
-                        <label>
-                            <input type="tel" name="subject" placeholder="Subject" />
-                        </label>
-                        <span class="line" id="tel-line"></span>
-                    </div>
+            <div class="col">
+                <div class="inputBox" id="lname-inputBox">
+                    <label>
+                        <input type="text" name="lname" placeholder="Last Name" />
+                    </label>
+                    <span class="line" id="lname-line"></span>
                 </div>
             </div>
-            <div class="row100">
-                <div class="col">
-                    <div class="inputBox textarea">
-                        <label>
-                            <textarea name="msg" placeholder="Type your message Here..."></textarea>
-                        </label>
-                        <span class="line"></span>
-                    </div>
+        </div>
+        <div class="row100" id="email-row100">
+            <div class="col">
+                <div class="inputBox" id="email-inputBox">
+                    <label>
+                        <input type="email" name="email" pattern="[^ @]*@[^ @]*" placeholder="Email" />
+                    </label>
+                    <span class="line" id="email-line"></span>
                 </div>
             </div>
-            <div class="row100">
-                <div class="col">
-                    <div class="submitbutton">
-                        <button class="btn submitbtn" type="submit">Submit</button>
-                    </div>
+            <div class="col">
+                <div class="inputBox" id="tel-inputBox">
+                    <label>
+                        <input type="tel" name="subject" placeholder="Subject" />
+                    </label>
+                    <span class="line" id="tel-line"></span>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="row100">
+            <div class="col">
+                <div class="inputBox textarea">
+                    <label>
+                        <textarea name="msg" placeholder="Type your message Here..."></textarea>
+                    </label>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row100">
+            <div class="col">
+                <div class="submitbutton">
+                    <button class="btn submitbtn" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}
